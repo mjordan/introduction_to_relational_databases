@@ -4,13 +4,19 @@ In this 4-hour workshop, participants will learn the basics of data modelling fo
 
 # Overview of how relational databases work
 
+Example: Model for books and authors (start with one-to-many, move on to many-to-many).
+
+Principle brands: [MySQL](https://www.mysql.com/), [PostgreSQL](http://www.postgresql.org/), [MariaDB](https://mariadb.org/), [SQLite](http://www.sqlite.org/), [MS Access](https://products.office.com/en-us/access), [Filemaker](http://www.filemaker.com/products/overview.html), [MS SQL Server](http://www.microsoft.com/en-ca/server-cloud/products/sql-server/), [Oracle](https://www.oracle.com/database/index.html)
+
+Tools for accessing relational databases: command line, management apps (e.g. web apps like [PHPMyAdmin](http://www.phpmyadmin.net/home_page/index.php) and [Adminer](http://www.adminer.org/), desktop apps like [MySQL Workbench](https://www.mysql.com/products/workbench/)), database frameworks like [Xataface](http://xataface.com/), custom applications
+
 # Data modelling for relational databases
 
 # Relational database development process
 
 # Populating and querying relational databases
 
-```SQL
+```sql
 SELECT * FROM foo WHERE id = 3;
 ```
 
@@ -24,11 +30,11 @@ Examples: Wordpress database model (https://codex.wordpress.org/images/9/97/WP3.
 
 # Relational databases compared to other types of databases
 
-NoSQL databases: Store non-tabular data. Examples include CouchDB, MongoDB. Typical applications serve large-scale structured data or as complements to relational database applications. No standardized query language.
+NoSQL databases: Store non-tabular data. Examples include [CouchDB](http://couchdb.apache.org/), [MongoDB](https://www.mongodb.org/). Typical applications serve large-scale structured data or as complements to relational database applications. No standardized query language.
 
-XML databases: Stores and queries XML documents, not tables. Typical application is for advanced queries against a set of XML documents using teh XPath or XQuery languages. Examples include eXist, BaseX.
+XML databases: Stores and queries XML documents, not tables. Typical application is for advanced queries against a set of XML documents using teh XPath or XQuery languages. Examples include [eXist](http://exist-db.org/), [BaseX](http://basex.org/).
 
-Triplestores: Store statements comprised of subject, predicate, object as defined by RDF (Resource Description Framework). Typical application is in providing a search endpoint for Linked Data via the SPARQL query language. Examples include Fuseki, JENA, Virtuoso.
+Triplestores: Store statements comprised of subject, predicate, object as defined by RDF (Resource Description Framework). Typical application is in providing a search endpoint for Linked Data via the SPARQL query language. Examples include [Fuseki](http://jena.apache.org/documentation/fuseki2/index.html), [Virtuoso](http://virtuoso.openlinksw.com/).
 
 
 
