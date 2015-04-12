@@ -4,21 +4,25 @@ In this 4-hour workshop, participants will learn the basics of data modelling fo
 
 # Overview of how relational databases work
 
-# Data Modelling for Relational Databases
+# Data modelling for relational databases
 
-# Relational Database Development Process
+# Relational database development process
 
-# Populating and Querying Relational Databases
+# Populating and querying relational databases
+
+```SQL
+SELECT * FROM foo WHERE id = 3;
+```
 
 
 ![Example of an autocomplete field for selecting values from linked tables](https://dl.dropboxusercontent.com/u/1015702/linked_to/intro_to_databases/xataface_linked_table_example.png)
 Image courtesy of John Dingle and Margaret Linley
 
-# Integrating Relational Databases into Applications
+# Integrating relational databases into applications
 
 Examples: Wordpress database model (https://codex.wordpress.org/images/9/97/WP3.8-ERD.png); Firefox's history feature (https://developer.mozilla.org/en-US/docs/Mozilla/Tech/Places)
 
-# Relational Databases Compared to Other Types of Databases
+# Relational databases compared to other types of databases
 
 NoSQL databases: Store non-tabular data. Examples include CouchDB, MongoDB. Typical applications serve large-scale structured data or as complements to relational database applications. No standardized query language.
 
