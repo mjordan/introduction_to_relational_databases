@@ -8,9 +8,15 @@ Relational databases strucutre data in tables, and provide mechanisms for linkin
 
 ![Some sample books](https://dl.dropboxusercontent.com/u/1015702/linked_to/intro_to_databases/sample_boo_list.png)
 
-Each row in the table describes a single book, and the data is organized into columns, with each intersection of a row and a column containing a single piece of data. But...
+Each row in the table describes a single book, and the data is organized into columns, with each intersection of a row and a column containing a single piece of data. But if each intersection of a row and a column can contain only one piece of data, how do we handle data that can apply more than once to each book, such as who wrote the book? It is common for a book to have more than a single author.
+
+Relational databases can (and usually do) organize data into multiple tables, and link the tables together so that all the data about something (in our example, a single book) can be assembled as needed. If we put data about authors in its own table, we can easily allow each book to have multiple authors. Because each book can have many authors, and each author can have written more than once book, we say that books and authors have a "many-to-many" relationship with each other. Relational databases accommodate this type of relationship by using a third table whose function is to relate the two things described in separate tables.
 
 ![Books and authors](https://dl.dropboxusercontent.com/u/1015702/linked_to/intro_to_databases/Books-Authors.jpg)
+
+In order to ensure that each row in the books table and each row in the authors table can be referenced reliably, we need to assign identifiers to each row that we can use the the third table.
+
+The 
 
 ## Selected relational database platforms
 
