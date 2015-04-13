@@ -12,7 +12,34 @@ Tools for managing relational databases: command line, web-based management apps
 
 # Data modeling for relational databases
 
-# Relational database development process
+* Entity-relationship modeling
+* Normalization
+
+Relational database development process
+
+![Database development process](https://dl.dropboxusercontent.com/u/1015702/linked_to/intro_to_databases/DB_Development_process.jpg)
+
+## Entity-relationship modeling
+
+List all entities (things) and their attributes
+
+Classes database:
+
+* Classes
+  * Date
+  * Time
+  * Course
+  * Location
+* Courses
+  * Number
+  * Title
+  * Instructor
+* Locations (Rooms)
+  * Building
+  * Type (classroom, seminar, amphitheatre, etc.)
+  * Built-in projector
+
+
 
 # Populating and querying relational databases
 
