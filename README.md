@@ -27,7 +27,7 @@ Lists, then ER diagrams
 
 List all entities (things) and their attributes
 
-Class scheduling database
+Class scheduling database, whose purpose is to aid in the scheduling of classes in a given semester.
 
 * Classes
   * Date
@@ -38,10 +38,19 @@ Class scheduling database
   * Number
   * Title
   * Instructor
-* Locations (Rooms)
+  * Department
+  * Semester [Do we need semsester if we have dates?]
+* Locations
+  * Room number
+  * Room name
   * Building
   * Type (classroom, seminar, amphitheatre, etc.)
-  * Built-in projector
+  * Built-in projector [maybe split out into Room Details table?]
+* Instructors
+  * Last name
+  * First name
+  * Department [Do we need department here and in Courses?]
+  * Email address
 
 ER Diagram version of the above list
 
@@ -55,7 +64,9 @@ ER Diagram version of the above list
 
 ## Third Normal Form
 
+## Fourth and Fifth Normal Forms
 
+Don't worry about these.
 
 # Populating and querying relational databases
 
@@ -67,7 +78,13 @@ SELECT * FROM foo WHERE id = 3;
 ![Example of an autocomplete field for selecting values from linked tables](https://dl.dropboxusercontent.com/u/1015702/linked_to/intro_to_databases/xataface_linked_table_example.png)
 Example of a user interface built using [Xataface](http://xataface.com/) for selecting values from linked tables. Image courtesy of John Dingle and Margaret Linley.
 
+# Exercises
 
+## Selecting data from the classes database
+
+## Inserting data 
+
+## Modifying data
 
 # Integrating relational databases into applications
 
@@ -82,6 +99,15 @@ NoSQL databases: Store non-tabular data. Examples include [CouchDB](http://couch
 XML databases: Stores and queries XML documents, not tables. Typical application is for advanced queries against a set of XML documents using teh XPath or XQuery languages. Examples include [eXist](http://exist-db.org/), [BaseX](http://basex.org/).
 
 Triplestores: Store statements comprised of subject, predicate, object as defined by RDF (Resource Description Framework). Typical application is in providing a search endpoint for Linked Data via the SPARQL query language. Examples include [Fuseki](http://jena.apache.org/documentation/fuseki2/index.html), [Virtuoso](http://virtuoso.openlinksw.com/).
+
+
+# Exercises
+
+## Data modeling
+
+Sample topics:
+* Database that tracks which articles cite which other articles
+* 
 
 
 
