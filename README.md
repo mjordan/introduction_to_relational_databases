@@ -4,9 +4,15 @@ In this 4-hour workshop, participants will learn the basics of data modelling fo
 
 # Overview of how relational databases work
 
-Example: Model for books and authors
+Relational databases strucutre data in tables, and provide mechanisms for linking (relating) those tables together to so that the data can be queried and managed efficiently. For example, if we wanted to manage a list of books, we would create a table that contained some data about those books:
+
+![Some sample books](https://dl.dropboxusercontent.com/u/1015702/linked_to/intro_to_databases/sample_boo_list.png)
+
+Each row in the table describes a single book, and the data is organized into columns, with each intersection of a row and a column containing a single piece of data. But...
 
 ![Books and authors](https://dl.dropboxusercontent.com/u/1015702/linked_to/intro_to_databases/Books-Authors.jpg)
+
+## Selected relational database platforms
 
 Common RDBMS systems: [MySQL](https://www.mysql.com/), [PostgreSQL](http://www.postgresql.org/), [MariaDB](https://mariadb.org/), [SQLite](http://www.sqlite.org/), [MS Access](https://products.office.com/en-us/access), [Filemaker](http://www.filemaker.com/products/overview.html), [MS SQL Server](http://www.microsoft.com/en-ca/server-cloud/products/sql-server/), [Oracle](https://www.oracle.com/database/index.html)
 
@@ -103,12 +109,12 @@ Triplestores: Store statements comprised of subject, predicate, object as define
 
 # Exercises
 
-## Data modeling
+## Data modeling for relational databases
 
 Sample topics:
 * Database that tracks which articles cite which other articles
-* 
-
+* Personal music, book (or other) collection
+* Research project status reporter (for producing periodic updates)
 
 
 # License
