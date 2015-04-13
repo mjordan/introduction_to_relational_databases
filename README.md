@@ -4,7 +4,9 @@ In this 4-hour workshop, participants will learn the basics of data modelling fo
 
 # Overview of how relational databases work
 
-Example: Model for books and authors (start with one-to-many, move on to many-to-many).
+Example: Model for books and authors
+
+![Books and authors](https://dl.dropboxusercontent.com/u/1015702/linked_to/intro_to_databases/Books-Authors.jpg)
 
 Common RDBMS systems: [MySQL](https://www.mysql.com/), [PostgreSQL](http://www.postgresql.org/), [MariaDB](https://mariadb.org/), [SQLite](http://www.sqlite.org/), [MS Access](https://products.office.com/en-us/access), [Filemaker](http://www.filemaker.com/products/overview.html), [MS SQL Server](http://www.microsoft.com/en-ca/server-cloud/products/sql-server/), [Oracle](https://www.oracle.com/database/index.html)
 
