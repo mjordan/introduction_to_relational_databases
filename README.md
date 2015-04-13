@@ -15,15 +15,17 @@ Tools for managing relational databases: command line, web-based management apps
 * Entity-relationship modeling
 * Normalization
 
-Relational database development process
+## Relational database development process
 
 ![Database development process](https://dl.dropboxusercontent.com/u/1015702/linked_to/intro_to_databases/DB_Development_process.jpg)
+
+Lists, then ER diagrams
 
 ## Entity-relationship modeling
 
 List all entities (things) and their attributes
 
-Classes database:
+Class scheduling database
 
 * Classes
   * Date
@@ -38,6 +40,18 @@ Classes database:
   * Building
   * Type (classroom, seminar, amphitheatre, etc.)
   * Built-in projector
+
+ER Diagram version of the above list
+
+
+
+## Normalization
+
+## First Normal Form
+
+## Second Normal Form
+
+## Third Normal Form
 
 
 
