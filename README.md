@@ -37,7 +37,44 @@ Putting together all of our tables, we get:
 Now that we've created our database, we can query it using SQL (Structured Query Language):
 
 ```sql
-SELECT * FROM foo WHERE id = 3;
+SELECT Books.book_id, title, ISBN, date_of_publication
+FROM Books, Editions
+WHERE Books.book_id = Editions.book_id
+AND Editions.date_of_publication >  '2003'
+```
+
+This query returns the folowing results:
+
+```
++---------+------------------------------------------------------+---------------+---------------------+
+| book_id | title                                                | ISBN          | date_of_publication |
++---------+------------------------------------------------------+---------------+---------------------+
+|       2 | Relational databases for really, really smart people | 9876543212345 |                2012 |
+|       3 | My life with relational databases: a memoir          | 3212345678909 |                2005 |
+|       3 | My life with relational databases: a memoir          | 3212345678909 |                2009 |
++---------+------------------------------------------------------+---------------+---------------------+
+3 rows in set (0.00 sec)
+```
+
+This query asks for the authors of the book with book_id 1:
+
+```
+SELECT DISTINCT first_name, last_name
+FROM Authors, BooksAuthors, Books
+WHERE BooksAuthors.author_id = Authors.author_id
+AND BooksAuthors.book_id = 1
+```
+The results are:
+
+```
++------------+---------------+
+| first_name | last_name     |
++------------+---------------+
+| Christina  | Lopez Baranda |
+| Hannah     | Jones         |
+| Tandice    | Turay         |
++------------+---------------+
+3 rows in set (0.01 sec)
 ```
 
 ## Selected relational database platforms
