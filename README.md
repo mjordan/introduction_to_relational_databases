@@ -7,7 +7,7 @@ In this 4-hour workshop, participants will learn the basics of data modelling fo
 Relational databases strucutre data in tables, and provide mechanisms for linking (relating) those tables together to so that the data can be queried and managed efficiently. For example, if we wanted to manage a list of books, we would create a table that contained some data about those books:
 
 
-![Some sample books](https://dl.dropboxusercontent.com/u/1015702/linked_to/intro_to_databases/book_list.png)
+![Some sample books](assets/sample_book_list.png)
 
 
 
@@ -15,13 +15,13 @@ Each row in the table describes a single book, and the data is organized into co
 
 Relational databases organize data into multiple tables, and link the tables together so that all the data about something (in our example, a single book) can be assembled from the relevant tables as needed. If we put data about authors in its own table, we can allow each book to have multiple authors. Because each book can have many authors, and each author can have written more than one book, we say that books and authors have a "many-to-many" relationship with each other. Relational databases accommodate this type of relationship by using a third table whose function is to relate the two things described in separate tables, as illustrated in this diagram:
 
-![Books and authors](https://dl.dropboxusercontent.com/u/1015702/linked_to/intro_to_databases/Books-Authors.jpg)
+![Books and authors](assets/BooksAuthors.jpg)
 
 For this method of breaking up data into multiple tables to work reliably, we to ensure that each row in the books table and each row in the authors table can be referenced uniquely, we need to assign identifiers to each rown in the book and authors tables, and we use those identifiers to relate the two tables to each other in the third table.
 
 "One-to-many" relationships don't use a third table. This type of relationship is expressed by linking two tables, one containing the data that is on the "one" side of the relationship and the other that is on the "many" side. For example, each book can have many editions, but each edition only applies to a single book:
 
-![Books and editions](https://dl.dropboxusercontent.com/u/1015702/linked_to/intro_to_databases/Books-Editions.jpg)
+![Books and editions](assets/BooksEditions.jpg)
 
 One-to-many relationships require unique IDs to link the tables reliably, but unlike in the intermediate table used in the many-to-many relationship, the table that contains the data describing the "many" side of the relationship has a column reserved for the ID of the "one" side of the relationship. 
 
@@ -40,7 +40,7 @@ Tools for managing relational databases: command line, web-based management apps
 
 ## Relational database development process
 
-![Database development process](https://dl.dropboxusercontent.com/u/1015702/linked_to/intro_to_databases/DB_Development_process.jpg)
+![Database development process](assets/DB_Development_process.jpg)
 
 Lists, then ER diagrams
 
@@ -102,7 +102,7 @@ SELECT * FROM foo WHERE id = 3;
 ```
 
 
-![Example of an autocomplete field for selecting values from linked tables](https://dl.dropboxusercontent.com/u/1015702/linked_to/intro_to_databases/xataface_linked_table_example.png)
+![Example of an autocomplete field for selecting values from linked tables](assets/xataface_linked_table_example.png)
 Example of a user interface built using [Xataface](http://xataface.com/) for selecting values from linked tables. Image courtesy of John Dingle and Margaret Linley.
 
 # Exercises
