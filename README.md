@@ -5,10 +5,11 @@ In this 4-hour workshop, participants will learn the basics of data modelling fo
 # How relational databases work
 
 Relational databases strucutre data in tables, and provide mechanisms for linking (relating) those tables together to so that the data can be queried and managed efficiently. For example, if we wanted to manage a list of books, we would create a table that contained some data about those books:
+ 
 
+![Some sample books](https://dl.dropboxusercontent.com/u/1015702/linked_to/intro_to_databases/sample_book_list.png)
 
-![Some sample books](https://dl.dropboxusercontent.com/u/1015702/linked_to/intro_to_databases/sample_boo_list.png)
-
+ 
 
 Each row in the table describes a single book, and the data is organized into columns, with each intersection of a row and a column containing a single piece of data. But if each intersection of a row and a column can contain only one piece of data, how do we handle data that can apply more than once to each book, such as its author? After all, it's pretty common for a book to have more than one author.
 
