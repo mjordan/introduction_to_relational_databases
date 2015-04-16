@@ -34,16 +34,62 @@ Putting together all of our tables, we get:
 
 ![Books and editions](assets/BooksAuthorsEditions.jpg)
 
-Now that we've created our database, we can query it using SQL (Structured Query Language):
+Now that we've created our database, we can query it using SQL (Structured Query Language) to view all information stored in the Authors table:
+
+```sql
+SELECT * FROM Authors;
+```
+
+which produces the following:
+
+```
++-----------+---------------+------------+
+| author_id | last_name     | first_name |
++-----------+---------------+------------+
+|         1 | Lopez Baranda | Christina  |
+|         2 | Jin-Soon      | Sin        |
+|         3 | Jones         | Hannah     |
+|         4 | Novak         | Stanislaw  |
+|         5 | Turay         | Tandice    |
+|         6 | Roy           | Shanta     |
+|         7 | Berger        | Henry      |
+|         8 | Khatami       | Paree      |
++-----------+---------------+------------+
+8 rows in set (0.01 sec)
+```
+
+This query asks for the authors of the book with book_id 1:
+
+```sql
+SELECT DISTINCT first_name, last_name
+FROM Authors, BooksAuthors, Books
+WHERE BooksAuthors.author_id = Authors.author_id
+AND BooksAuthors.book_id = 1
+ ORDER BY last_name;
+```
+The results are:
+
+```
++------------+---------------+
+| first_name | last_name     |
++------------+---------------+
+| Hannah     | Jones         |
+| Christina  | Lopez Baranda |
+| Tandice    | Turay         |
++------------+---------------+
+3 rows in set (0.01 sec)
+```
+
+To find the books that have editions published after 2003, we would use this SQL query:
 
 ```sql
 SELECT Books.book_id, title, ISBN, date_of_publication
 FROM Books, Editions
 WHERE Books.book_id = Editions.book_id
-AND Editions.date_of_publication >  '2003'
+AND Editions.date_of_publication > '2003';
 ```
 
-This query returns the folowing results:
+which returns the folowing results:
 
 ```
 +---------+------------------------------------------------------+---------------+---------------------+
@@ -54,27 +100,6 @@ This query returns the folowing results:
 |       3 | My life with relational databases: a memoir          | 3212345678909 |                2009 |
 +---------+------------------------------------------------------+---------------+---------------------+
 3 rows in set (0.00 sec)
-```
-
-This query asks for the authors of the book with book_id 1:
-
-```
-SELECT DISTINCT first_name, last_name
-FROM Authors, BooksAuthors, Books
-WHERE BooksAuthors.author_id = Authors.author_id
-AND BooksAuthors.book_id = 1
-```
-The results are:
-
-```
-+------------+---------------+
-| first_name | last_name     |
-+------------+---------------+
-| Christina  | Lopez Baranda |
-| Hannah     | Jones         |
-| Tandice    | Turay         |
-+------------+---------------+
-3 rows in set (0.01 sec)
 ```
 
 ## Selected relational database platforms
