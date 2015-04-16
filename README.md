@@ -6,22 +6,25 @@ In this 4-hour workshop, participants will learn the basics of data modelling fo
 
 Relational databases strucutre data in tables, and provide mechanisms for linking (relating) those tables together to so that the data can be queried and managed efficiently. For example, if we wanted to manage a list of books, we would create a table that contained some data about those books:
 
-
+![Spacer image](assets/spacer.jpg)
 ![Some sample books](assets/sample_book_list.png)
-
-
+![Spacer image](assets/spacer.jpg)
 
 Each row in the table describes a single book, and the data is organized into columns, with each intersection of a row and a column containing a single piece of data. But if each intersection of a row and a column can contain only one piece of data, how do we handle data that can apply more than once to each book, such as its author? It's pretty common for a book to have more than one author.
 
 Relational databases organize data into multiple tables, and link the tables together so that all the data about something (in our example, a single book) can be assembled from the relevant tables as needed. If we put data about authors in its own table, we can allow each book to have multiple authors. Because each book can have many authors, and each author can have written more than one book, we say that books and authors have a "many-to-many" relationship with each other. Relational databases accommodate this type of relationship by using a third table whose function is to relate the two things described in separate tables, as illustrated in this diagram:
 
+![Spacer image](assets/spacer.jpg)
 ![Books and authors](assets/BooksAuthors.jpg)
+![Spacer image](assets/spacer.jpg)
 
 For this method of breaking up data into multiple tables to work reliably, we to ensure that each row in the books table and each row in the authors table can be referenced uniquely, we need to assign identifiers to each rown in the book and authors tables, and we use those identifiers to relate the two tables to each other in the third table.
 
 "One-to-many" relationships don't use a third table. This type of relationship is expressed by linking two tables, one containing the data that is on the "one" side of the relationship and the other that is on the "many" side. For example, each book can have many editions, but each edition only applies to a single book:
 
+![Spacer image](assets/spacer.jpg)
 ![Books and editions](assets/BooksEditions.jpg)
+![Spacer image](assets/spacer.jpg)
 
 One-to-many relationships require unique IDs to link the tables reliably, but unlike in the intermediate table used in the many-to-many relationship, the table that contains the data describing the "many" side of the relationship has a column reserved for the ID of the "one" side of the relationship. 
 
@@ -170,9 +173,7 @@ Class scheduling database, whose purpose is to aid in the scheduling of classes 
   * Department [Do we need department here and in Courses?]
   * Email address
 
-ER Diagram version of the above list
-
-
+[@todo: Insert complete ER Diagram version of the above list, for MySQL Workbench at least and maybe Adminer too?]
 
 ## Normalization
 
@@ -200,6 +201,7 @@ SELECT * FROM foo WHERE id = 3;
 
 
 ![Example of an autocomplete field for selecting values from linked tables](assets/xataface_linked_table_example.png)
+![Spacer image](assets/spacer.jpg)
 Example of a user interface built using [Xataface](http://xataface.com/) for selecting values from linked tables. Image courtesy of John Dingle and Margaret Linley.
 
 # Exercises
