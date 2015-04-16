@@ -14,21 +14,31 @@ Each row in the table describes a single book, and the data is organized into co
 
 Relational databases organize data into multiple tables, and link the tables together so that all the data about something (in our example, a single book) can be assembled from the relevant tables as needed. If we put data about authors in its own table, we can allow each book to have multiple authors. Because each book can have many authors, and each author can have written more than one book, we say that books and authors have a "many-to-many" relationship with each other. Relational databases accommodate this type of relationship by using a third table whose function is to relate the two things described in separate tables, as illustrated in this diagram:
 
-![Spacer image](assets/spacer.jpg)
+
 ![Books and authors](assets/BooksAuthors.jpg)
-![Spacer image](assets/spacer.jpg)
+
 
 For this method of breaking up data into multiple tables to work reliably, we to ensure that each row in the books table and each row in the authors table can be referenced uniquely, we need to assign identifiers to each rown in the book and authors tables, and we use those identifiers to relate the two tables to each other in the third table.
 
 "One-to-many" relationships don't use a third table. This type of relationship is expressed by linking two tables, one containing the data that is on the "one" side of the relationship and the other that is on the "many" side. For example, each book can have many editions, but each edition only applies to a single book:
 
-![Spacer image](assets/spacer.jpg)
+
 ![Books and editions](assets/BooksEditions.jpg)
-![Spacer image](assets/spacer.jpg)
+
 
 One-to-many relationships require unique IDs to link the tables reliably, but unlike in the intermediate table used in the many-to-many relationship, the table that contains the data describing the "many" side of the relationship has a column reserved for the ID of the "one" side of the relationship. 
 
 The IDs used to uniquely identify the things described in tables are called "primary keys". If these IDs are used in other tables, they are called "foreign keys" in those tables. For example, the "book_id" column in the Books table is that table's primary key, but the "book_id" column in the Editions table is a foreign key.
+
+Putting together all of our tables, we get:
+
+![Books and editions](assets/BooksAuthorsEditions.jpg)
+
+Now that we've created our database, we can query it using SQL (Structured Query Language):
+
+```sql
+SELECT * FROM foo WHERE id = 3;
+```
 
 ## Selected relational database platforms
 
