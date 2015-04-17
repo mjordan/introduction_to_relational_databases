@@ -446,16 +446,19 @@ Firefox's use of SQLite demostrates that relational databases can be used in des
 
 ## Web application frameworks
 
-Many application development frameworks are availble that provide tools for integrating relational databases into web applications. These frameworks implement tools require knowlege of programming languages such as PHP or Python, but they provide a wide range of tools to make developing applications easier, more secure, and more maintainable than if the applications were developed using only the core language. Popular web application frameworks include:
+Many application development frameworks are availble that provide tools for integrating relational databases into web applications. If you were to develop a relational database to use in your research, and you wanted to have that database live on the web, you would likely need to use (or pay someone else to use) a web application framework to create a useful application for your database's users to interact with it.
 
-* [Symfony](http://symfony.com/) for PHP
-* [Django](https://www.djangoproject.com/) for Python
-* [Rails](http://rubyonrails.org/) for Ruby
-* [Play](https://www.playframework.com/) for Java
+These frameworks implement tools require knowlege of programming languages such as PHP or Python, but they provide a wide range of tools to make developing applications easier, more secure, and more maintainable than if the applications were developed using only the core language. Popular web application frameworks include (notice the consistency across their slogans):
 
-These toolkits use a technology called "object-relational mapping" (ORM) to manage databases. ORMs allow developers to avoid much of the database plaform-specifc SQL syntax and table management features and to focus on how the entities in their databases are structured. ORMs also make it easy to change the structure of a database. Using ORMs are outside the scope of this workshop, but Django's [introduction to its ORM](https://docs.djangoproject.com/en/1.8/topics/db/models/) provides a very readable (for readers who know the basics of how relational databases work) overview of how ORMs in general function.
+* [Django](https://www.djangoproject.com/) for Python ("The web framework for perfectionists with deadlines.")
+* [Symfony](http://symfony.com/) for PHP ("Speed up the creation and maintenance of your PHP web applications. End repetitive coding tasks and enjoy the power of controlling your code.")
+* [Rails](http://rubyonrails.org/) for Ruby ("Ruby on Rails® is an open-source web framework that’s optimized
+for programmer happiness and sustainable productivity.")
+* [Play](https://www.playframework.com/) for Java ("The High Velocity Web Framework For Java and Scala")
 
-Many web application frameworks provide tools to generate web forms for creating, updating, and deleting rows in the database, and for providing other ways for users to interact with the database.
+These toolkits use a technology called "object-relational mapping" (ORM) to manage databases. ORMs allow developers to avoid much of the database plaform-specifc SQL syntax and table management features and to focus on how the entities in their databases are structured. ORMs also make it easy to change the structure of a database. Using ORMs are outside the scope of this workshop, but Django's [introduction to its ORM](https://docs.djangoproject.com/en/1.8/topics/db/models/) provides a very readable overview of how ORMs in general function for readers who know the fundamentals of how relational databases work.
+
+Many web application frameworks provide tools to generate web forms for creating, updating, and deleting rows in the database, and for providing other ways for users to interact with the database. In many ways, these frameworks are so popular because of the efficiency they bring to creating relational database applications for the web and for the tools they provide that allow developers to avoid direct, low-level interaction with the RDBMS itself.
 
 # Relational databases compared to other types of databases
 
