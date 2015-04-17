@@ -1,7 +1,8 @@
 #!/bin/bash
 
 # Script to create a set of MySQL databases and corresponding user accounts.
-# User account names are in the form stringNUM. This script is in the public domain.
+# User account names and database names (they are the same) are in the form stringNUM.
+# This script is in the public domain.
 # Usage: ./createdbs.sh
 # You will be asked to confirm that you want to proceed, and if you answer 'y',
 # prompted for your MySQL root user's password.
@@ -17,6 +18,8 @@ PASSWORDLENGTH=6
 # USERNAMESTUB is a string that will be prepended to all usernames.
 USERNAMESTUB=footest
 # PATHTODBTOLOAD is the path to an SQL file to load into the newly created database.
+# File must exist. If you don't want to create any tables, point to an empty file
+# (e.g., created using 'touch sampledb.sql').
 PATHTODBTOLOAD=sampledb.sql
 
 GLOBIGNORE="*"

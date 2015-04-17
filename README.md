@@ -359,11 +359,25 @@ Example of a user interface built using [Xataface](http://xataface.com/) for sel
 
 # Exercises
 
-## Selecting data from the classes database
+In this exercise, we will create a database that contains a single table, populate the table with some data, and modify some of the data. Your instructor will provide the URL of the tool you will use, plus login credentials for the tool.
+
+## Creating a table
 
 ## Inserting data 
 
 ## Modifying data
+
+## Selecting data
+
+# Exercise
+
+In this exercise, we will perform some SELECT queries on the Classes database we modelled earlier in the workshop. Your instructor will provide the URL of the tool you will use, plus login credentials for the tool.
+
+## Selecting data from the Classes database
+
+1. Find all the..
+
+2. Find all the 
 
 # Integrating relational databases into applications
 
