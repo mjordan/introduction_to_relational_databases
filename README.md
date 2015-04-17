@@ -293,7 +293,7 @@ MySQL Workbench ER diagram view
 
 ## Relational database development process
 
-The process of developing the structure of a relational database is iterative. Only the simplest databases do not require repeated testing and adjustment before they meet their intended goals. This diagram represents the various steps you should consider taking while developing your database:
+The process of developing the structure of a relational database is iterative. Only the simplest databases do not require repeated testing and adjustment before they meet their intended goals. This diagram represents the various steps you should consider taking while developing your database, starting with "Define entities and their attributes" and moving clockwise:
 
 ![Database development process](assets/DB_Development_process.jpg)
 
