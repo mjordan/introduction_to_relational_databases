@@ -168,13 +168,17 @@ which returns the folowing results:
 ```
 You'll notice repetition in the book_id, title, and ISBN columns in the results. Those columns are the ones we're asking for in the query, so the response is correct, since we're also asking for the date of publication from the Editions table, which in our results contains the correct values.
 
-## Selected relational database platforms
+## Relational database platforms
 
-Common RDBMS systems: [MySQL](https://www.mysql.com/), [PostgreSQL](http://www.postgresql.org/), [MariaDB](https://mariadb.org/), [SQLite](http://www.sqlite.org/), [MS Access](https://products.office.com/en-us/access), [Filemaker](http://www.filemaker.com/products/overview.html), [MS SQL Server](http://www.microsoft.com/en-ca/server-cloud/products/sql-server/), [Oracle](https://www.oracle.com/database/index.html)
+### Common RDBMS systems
 
-Tools for managing relational databases: command line, web-based management apps (e.g. web apps like [PHPMyAdmin](http://www.phpmyadmin.net/home_page/index.php) and [Adminer](http://www.adminer.org/), desktop management apps like [MySQL Workbench](https://www.mysql.com/products/workbench/)), custom applications.
+[MySQL](https://www.mysql.com/), [PostgreSQL](http://www.postgresql.org/), [MariaDB](https://mariadb.org/), [SQLite](http://www.sqlite.org/), [MS Access](https://products.office.com/en-us/access), [Filemaker](http://www.filemaker.com/products/overview.html), [MS SQL Server](http://www.microsoft.com/en-ca/server-cloud/products/sql-server/), [Oracle](https://www.oracle.com/database/index.html)
 
-The following is an "SQL file" produced by phpMyAdmin:
+### Tools for managing relational databases
+
+Command line clients (e.g., mysql and psql), web-based management apps (e.g. web apps like [PHPMyAdmin](http://www.phpmyadmin.net/home_page/index.php) and [Adminer](http://www.adminer.org/), desktop management apps like [MySQL Workbench](https://www.mysql.com/products/workbench/)), custom applications.
+
+The following is an "SQL file" (also known as a dump or script) produced by phpMyAdmin:
 
 ```sql
 -- phpMyAdmin SQL Dump
