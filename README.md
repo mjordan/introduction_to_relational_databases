@@ -361,7 +361,7 @@ Example of a user interface built using [Xataface](http://xataface.com/) for sel
 
 In this exercise, we will create a database that contains a single table describing shapes, populate the table with some data, and modify some of the data. Your instructor will provide the URL of the tool you will use, plus login credentials for the tool.
 
-The ER diagram for the table contains the attributes/columns you need to create:
+The ER diagram for the table is:
 
 ![SQL exercise table structure](assets/SQL_exercise_table.jpg)
 
@@ -372,6 +372,12 @@ The ER diagram for the table contains the attributes/columns you need to create:
 * real_world_example: Enter the name of an object that has this shape, e.g., for 'circle' you could use 'Frisbee'
 
 ## Creating a table
+
+Won't be using SQL, we'll be using Adminer's web interface, but the SQL would be:
+
+```sql
+CREATE 
+```
 
 ## Inserting data 
 
