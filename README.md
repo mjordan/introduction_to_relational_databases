@@ -30,14 +30,14 @@ One-to-many relationships require unique IDs to link the tables reliably, but un
 
 The IDs used to uniquely identify the things described in tables are called "primary keys". If these IDs are used in other tables, they are called "foreign keys" in those tables. For example, the "book_id" column in the Books table is that table's primary key, but the "book_id" column in the Editions table is a foreign key.
 
-Putting together all of our tables, we get:
+Putting together all of our tables, we get a database structure that can be represented like this:
 
 ![Books and editions](assets/BooksAuthorsEditions.jpg)
 
-Now that we've created our database, we can query it using SQL (Structured Query Language) to view all information stored in the Authors table:
+After we have populated the database with data (we'll explain how to do that later), we can query it using SQL (the Structured Query Language). For example, to view all information stored in the Authors table, sorted by last name, we use the following query:
 
 ```sql
-SELECT * FROM Authors;
+SELECT * FROM Authors ORDER by last_name;
 ```
 
 which produces the following:
@@ -46,26 +46,29 @@ which produces the following:
 +-----------+---------------+------------+
 | author_id | last_name     | first_name |
 +-----------+---------------+------------+
-|         1 | Lopez Baranda | Christina  |
+|         7 | Berger        | Henry      |
 |         2 | Jin-Soon      | Sin        |
 |         3 | Jones         | Hannah     |
-|         4 | Novak         | Stanislaw  |
-|         5 | Turay         | Tandice    |
-|         6 | Roy           | Shanta     |
-|         7 | Berger        | Henry      |
 |         8 | Khatami       | Paree      |
+|         1 | Lopez Baranda | Christina  |
+|         4 | Novak         | Stanislaw  |
+|         6 | Roy           | Shanta     |
+|         5 | Turay         | Tandice    |
 +-----------+---------------+------------+
 8 rows in set (0.01 sec)
+
 ```
 
-This query asks for the authors of the book with book_id 1:
+Using uppercase for SQL commands is a convention only, it's not mandatory. Also, the output we're seeing here is specific to the MySQL command-line client, which we're not using in this workshop. The results output will look different depending on what tool is being used to query the database.
+
+
+This query asks for the first and last names of authors of the book with book_id 1:
 
 ```sql
 SELECT DISTINCT first_name, last_name
 FROM Authors, BooksAuthors, Books
 WHERE BooksAuthors.author_id = Authors.author_id
-AND BooksAuthors.book_id = 1
- ORDER BY last_name;
+AND BooksAuthors.book_id = 1;
 ```
 The results are:
 
@@ -80,7 +83,10 @@ The results are:
 3 rows in set (0.01 sec)
 ```
 
-To find the books that have editions published after 2003, we would use this SQL query:
+This query is more complex than the first one, because it is asking for data from multiple tables. It relates that tables using the clause `WHERE BooksAuthors.author_id = Authors.author_id`, which in relational database jargon is called a "join" query.
+
+
+To find the book IDs, titles, and ISBNs that have editions published after (that is, greater than) 2003, we would use this SQL query:
 
 ```sql
 SELECT Books.book_id, title, ISBN, date_of_publication
@@ -101,6 +107,7 @@ which returns the folowing results:
 +---------+------------------------------------------------------+---------------+---------------------+
 3 rows in set (0.00 sec)
 ```
+You'll notice repetition in the book_id, title, and ISBN columns in the results. Those columns are the ones we're asking for in the query, so the response is correct, since we're also asking for the date of publication from the Editions table, which in our results contains the correct values.
 
 ## Selected relational database platforms
 
@@ -268,7 +275,7 @@ Don't worry about these.
 # Populating and querying relational databases
 
 ```sql
-SELECT * FROM foo WHERE id = 3;
+SELECT * FROM Authors ORDER by last_name;
 ```
 
 
