@@ -4,35 +4,94 @@ In this 4-hour workshop, participants will learn the basics of data modelling fo
 
 # How relational databases work
 
+## Tables, relationships, and IDs
+
 Relational databases strucutre data in tables, and provide mechanisms for linking (relating) those tables together to so that the data can be queried and managed efficiently. For example, if we wanted to manage a list of books, we would create a table that contained some data about those books:
 
-![Spacer image](assets/spacer.jpg)
 ![Some sample books](assets/sample_book_list.png)
-![Spacer image](assets/spacer.jpg)
 
 Each row in the table describes a single book, and the data is organized into columns, with each intersection of a row and a column containing a single piece of data. But if each intersection of a row and a column can contain only one piece of data, how do we handle data that can apply more than once to each book, such as its author? It's pretty common for a book to have more than one author.
 
 Relational databases organize data into multiple tables, and link the tables together so that all the data about something (in our example, a single book) can be assembled from the relevant tables as needed. If we put data about authors in its own table, we can allow each book to have multiple authors. Because each book can have many authors, and each author can have written more than one book, we say that books and authors have a "many-to-many" relationship with each other. Relational databases accommodate this type of relationship by using a third table whose function is to relate the two things described in separate tables, as illustrated in this diagram:
 
-
 ![Books and authors](assets/BooksAuthors.jpg)
 
+This intermediate table is known as a "relation" or "join" table. For this method of breaking up data into multiple tables to work reliably, we need to ensure that each row in the books table and each row in the authors table can be referenced uniquely. To do this, we need to assign identifiers to each rown in the book and authors tables, and we use those identifiers to relate the two tables to each other in the third table. We will see some examples of these identifiers in the query examples below.
 
-For this method of breaking up data into multiple tables to work reliably, we to ensure that each row in the books table and each row in the authors table can be referenced uniquely, we need to assign identifiers to each rown in the book and authors tables, and we use those identifiers to relate the two tables to each other in the third table.
-
-"One-to-many" relationships don't use a third table. This type of relationship is expressed by linking two tables, one containing the data that is on the "one" side of the relationship and the other that is on the "many" side. For example, each book can have many editions, but each edition only applies to a single book:
-
+"One-to-many" relationships don't use a third table. This type of relationship links two tables, one containing the data that is on the "one" side of the relationship and the other that is on the "many" side. For example, each book can have many editions, but each edition applies to only a single book:
 
 ![Books and editions](assets/BooksEditions.jpg)
 
-
-One-to-many relationships require unique IDs to link the tables reliably, but unlike in the intermediate table used in the many-to-many relationship, the table that contains the data describing the "many" side of the relationship has a column reserved for the ID of the "one" side of the relationship. 
+One-to-many relationships also require that rows in tables have unique IDs, but unlike in the join table used in many-to-many relationship, the table that contains the data describing the "many" side of the relationship has a column reserved for the ID of the "one" side of the relationship. 
 
 The IDs used to uniquely identify the things described in tables are called "primary keys". If these IDs are used in other tables, they are called "foreign keys" in those tables. For example, the "book_id" column in the Books table is that table's primary key, but the "book_id" column in the Editions table is a foreign key.
 
 Putting together all of our tables, we get a database structure that can be represented like this:
 
 ![Books and editions](assets/BooksAuthorsEditions.jpg)
+
+Here are the tables, structured as illustrated above, with some data in them:
+
+Books
+
+```
++---------+------------------------------------------------------+---------------+
+| book_id | title                                                | ISBN          |
++---------+------------------------------------------------------+---------------+
+|       1 | Creating relational databases for fun and profit     | 7654321123456 |
+|       2 | Relational databases for really, really smart people | 9876543212345 |
+|       3 | My life with relational databases: a memoir          | 3212345678909 |
+|       4 | Relational databases: an existential journey         | 8172635412345 |
++---------+------------------------------------------------------+---------------+
+```
+
+Authors
+```
++-----------+---------------+------------+
+| author_id | last_name     | first_name |
++-----------+---------------+------------+
+|         1 | Lopez Baranda | Christina  |
+|         2 | Jin-Soon      | Sin        |
+|         3 | Jones         | Hannah     |
+|         4 | Novak         | Stanislaw  |
+|         5 | Turay         | Tandice    |
+|         6 | Roy           | Shanta     |
+|         7 | Berger        | Henry      |
+|         8 | Khatami       | Paree      |
++-----------+---------------+------------+
+```
+
+BooksAuthors
+```
++---------+-----------+
+| book_id | author_id |
++---------+-----------+
+|       3 |         6 |
+|       2 |         4 |
+|       2 |         5 |
+|       1 |         1 |
+|       1 |         3 |
+|       1 |         5 |
+|       4 |         8 |
++---------+-----------+
+```
+
+Editions
+```
++------------+---------+---------------------+----------------+
+| edition_id | book_id | date_of_publication | edition_number |
++------------+---------+---------------------+----------------+
+|          1 |       3 |                2001 | 1              |
+|          2 |       3 |                2003 | 2              |
+|          3 |       4 |                2003 | 1              |
+|          5 |       1 |                2000 | 1              |
+|          6 |       3 |                2005 | 3              |
+|          8 |       2 |                2012 | 1              |
+|          9 |       3 |                2009 | 4              |
++------------+---------+---------------------+----------------+
+```
+
+## Querying tables using SQL
 
 After we have populated the database with data (we'll explain how to do that later), we can query it using SQL (the Structured Query Language). For example, to view all information stored in the Authors table, sorted by last name, we use the following query:
 
@@ -59,8 +118,7 @@ which produces the following:
 
 ```
 
-Using uppercase for SQL commands is a convention only, it's not mandatory. Also, the output we're seeing here is specific to the MySQL command-line client, which we're not using in this workshop. The results output will look different depending on what tool is being used to query the database.
-
+Using uppercase for SQL commands is a convention only, it's not mandatory. Also, the output we're seeing here is specific to the MySQL command-line client, which we're not using in this workshop. How you query the databaase, and how the results output will look will depend on what tool is being used to manage the database.
 
 This query asks for the first and last names of authors of the book with book_id 1:
 
@@ -83,8 +141,7 @@ The results are:
 3 rows in set (0.01 sec)
 ```
 
-This query is more complex than the first one, because it is asking for data from multiple tables. It relates that tables using the clause `WHERE BooksAuthors.author_id = Authors.author_id`, which in relational database jargon is called a "join" query.
-
+This query is more complex than the first one, because it is asking for data from multiple tables. It relates the tables using the clause `WHERE BooksAuthors.author_id = Authors.author_id`, which in relational database jargon is called a "join" query (not to be confused with the "join" table used to store many-to-many relationships.)
 
 To find the book IDs, titles, and ISBNs that have editions published after (that is, greater than) 2003, we would use this SQL query:
 
