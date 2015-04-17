@@ -363,7 +363,7 @@ In this exercise, we will create a database that contains a single table describ
 
 The ER diagram for the table contains the attributes/columns you need to create:
 
-![SQL exercise table structure](SQL_exercise_table.jpg)
+![SQL exercise table structure](assets/SQL_exercise_table.jpg)
 
 * shape_id: This is the primary key for the table. It must be set to Auto Increment.
 * name: The name of the shape, e.g., square, triangle, circle, etc.
