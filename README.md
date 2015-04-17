@@ -409,9 +409,14 @@ WHERE `shape_id` = '1';
 
 ## Deleting data
 
-
+```sql
+DELETE FROM `shapes`
+WHERE `shape_id` = '1';
+```
 
 ## Selecting data
+
+
 
 # Exercise: Selecting data from the Classes database
 
