@@ -172,7 +172,18 @@ You'll notice repetition in the book_id, title, and ISBN columns in the results.
 
 ### Common RDBMS systems
 
-[MySQL](https://www.mysql.com/), [PostgreSQL](http://www.postgresql.org/), [MariaDB](https://mariadb.org/), [SQLite](http://www.sqlite.org/), [MS Access](https://products.office.com/en-us/access), [Filemaker](http://www.filemaker.com/products/overview.html), [MS SQL Server](http://www.microsoft.com/en-ca/server-cloud/products/sql-server/), [Oracle](https://www.oracle.com/database/index.html)
+There are many proprietary and open source relational database management systems (RDBMS). The most common include:
+
+* [MySQL](https://www.mysql.com/)
+* [PostgreSQL](http://www.postgresql.org/)
+* [MariaDB](https://mariadb.org/)
+* [SQLite](http://www.sqlite.org/)
+* [Microsoft Access](https://products.office.com/en-us/access)
+* [Filemaker](http://www.filemaker.com/products/overview.html)
+* [Microsoft SQL Server](http://www.microsoft.com/en-ca/server-cloud/products/sql-server/)
+* [Oracle](https://www.oracle.com/database/index.html)
+
+While SQL is an [international standard](http://en.wikipedia.org/wiki/SQL#Standardization), and most of the systems listed above implment it thoroughly, every RDBMS has features or extensions to SQL that differentiate it from its competitors. Some, like Microsoft Access and Filemaker, include full graphical user interfaces to creating and querying databases. Others, like MySQL and PostgreSQL, include only a back-end server and command-line clients for querying and administration. It is common for third-party tools to be used to interact with these databases. Some of these tools are described in the next section.
 
 ### Tools for managing relational databases
 
