@@ -340,7 +340,9 @@ We can then use this list as a basis for rough ER diagram, which provides us wit
 
 ![Rough ER diagram with notes](assets/classes_modelling_example.jpg)
 
-Using the modifications made to our 
+Using the modifications made to our rough ER diagram, we can create a cleaner version before moving on to normalization:
+
+![Revised ER diagram](assets/classes_modelling_example_revised_erd.jpg)
 
 
 ## Normalization
