@@ -293,15 +293,25 @@ MySQL Workbench ER diagram view
 
 ## Relational database development process
 
+The process of developing the structure of a relational database is iterative. Only the simplest databases do not require repeated testing and adjustment before they meet their intended goals. This diagram represents the various steps you should consider taking while developing your database:
+
 ![Database development process](assets/DB_Development_process.jpg)
 
-Lists, then ER diagrams
+Defining the entities in the database (the things that the database describes), their attributes, and their relationships to each other (e.g., one-to-many, many-to-many) can be done using several techniques. Many people like to start with simple lists of entities and attributes, and then translate those into Entity Relationship diagrams to better match the functionality of an RDBMS. The following section provides one concrete example of this method.
 
 ## Entity-relationship modeling
 
 List all entities (things) and their attributes
 
-Class scheduling database, whose purpose is to aid in the scheduling of classes in a given semester.
+Our goal in this example is to create a database that we can use to schedule classes in a set of academic courses. Any real school, college, university, or training center will have such a database. The database used in this example is _probably_ a lot simpler than the real databases used in these institutions.
+
+We will begin by listing all of the things we need to include in our database:
+
+* Classes
+* Courses
+* Rooms
+
+If we put some thought into this short list of entities, and add to each one the likely attributes that we'll need to include, we come up with a more detailed list, plus some example values for the attributes and some questions we need to flesh out more fully later on:
 
 * Classes
   * Date
@@ -315,10 +325,10 @@ Class scheduling database, whose purpose is to aid in the scheduling of classes 
   * Department
   * Semester [Do we need semsester if we have dates?]
 * Locations
-  * Room number
+  * Room number [Why do we use "room" for the attributes but call the table "locations"?]
   * Room name
   * Building
-  * Type (classroom, seminar, amphitheatre, etc.)
+  * Type (e.g., classroom, seminar, amphitheatre, etc.)
   * Built-in projector [maybe split out into Room Details table?]
 * Instructors
   * Last name
@@ -326,8 +336,11 @@ Class scheduling database, whose purpose is to aid in the scheduling of classes 
   * Department [Do we need department here and in Courses?]
   * Email address
 
+We can then use this list as a basis for rough ER diagram, which provides us with an opportunity to think about the relationships between the entities using a more formalized approach:
 
 ![Rough ER diagram with notes](assets/classes_modelling_example.jpg)
+
+Using the modifications made to our 
 
 
 ## Normalization
