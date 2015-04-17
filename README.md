@@ -376,12 +376,40 @@ The ER diagram for the table (including the data types for each column) is:
 Won't be using SQL, we'll be using Adminer's web interface, but the SQL would be:
 
 ```sql
-CREATE 
+CREATE TABLE IF NOT EXISTS `shapes` (
+  `shape_id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` text COLLATE utf8_unicode_ci NOT NULL,
+  `number_straight_sides` int(11) NOT NULL DEFAULT '0',
+  `example_picture_url` text COLLATE utf8_unicode_ci NOT NULL,
+  `real_world_example` text COLLATE utf8_unicode_ci NOT NULL,
+  PRIMARY KEY (`shape_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
 ```
 
-## Inserting data 
+This is what you should see in Adminer:
+
+![Creating a table in Adminer](assets/using_sql_exercise_creating_table.png)
+
+## Inserting data
+
+We'll use raw SQL to add (INSERT) a row into the table. Click on the "SQL command" link on the left-hand side of the Adminer interface and enter this:
+
+```sql
+INSERT INTO `shapes` (`name`, `number_straight_sides`, `example_picture_url`, `real_world_example`)
+VALUES ('square', '4', 'http://www.mlahanas.de/Greeks/images/sq1.jpg', 'Window');
+```
 
 ## Modifying data
+
+```sql
+UPDATE `shapes` SET
+`real_world_example` = 'Plate'
+WHERE `shape_id` = '1';
+```
+
+## Deleting data
+
+
 
 ## Selecting data
 
