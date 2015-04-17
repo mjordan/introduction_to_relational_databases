@@ -357,9 +357,19 @@ SELECT * FROM Authors ORDER by last_name;
 ![Spacer image](assets/spacer.jpg)
 Example of a user interface built using [Xataface](http://xataface.com/) for selecting values from linked tables. Image courtesy of John Dingle and Margaret Linley.
 
-# Exercises
+# Exercise: Using SQL
 
-In this exercise, we will create a database that contains a single table, populate the table with some data, and modify some of the data. Your instructor will provide the URL of the tool you will use, plus login credentials for the tool.
+In this exercise, we will create a database that contains a single table describing shapes, populate the table with some data, and modify some of the data. Your instructor will provide the URL of the tool you will use, plus login credentials for the tool.
+
+The ER diagram for the table contains the attributes/columns you need to create:
+
+![SQL exercise table structure](SQL_exercise_table.jpg)
+
+* shape_id: This is the primary key for the table. It must be set to Auto Increment.
+* name: The name of the shape, e.g., square, triangle, circle, etc.
+* number_straight_sides: The number of straight sides the shape has. Make this field have a default value of 0 (zero).
+* example_picture_url: To popluate this field, you will need to find a picture of the shape on the Web.
+* real_world_example: Enter the name of an object that has this shape, e.g., for 'circle' you could use 'Frisbee'
 
 ## Creating a table
 
@@ -369,11 +379,9 @@ In this exercise, we will create a database that contains a single table, popula
 
 ## Selecting data
 
-# Exercise
+# Exercise: Selecting data from the Classes database
 
 In this exercise, we will perform some SELECT queries on the Classes database we modelled earlier in the workshop. Your instructor will provide the URL of the tool you will use, plus login credentials for the tool.
-
-## Selecting data from the Classes database
 
 1. Find all the..
 
@@ -394,9 +402,7 @@ XML databases: Stores and queries XML documents, not tables. Typical application
 Triplestores: Store statements comprised of subject, predicate, object as defined by RDF (Resource Description Framework). Typical application is in providing a search endpoint for Linked Data via the SPARQL query language. Examples include [Fuseki](http://jena.apache.org/documentation/fuseki2/index.html), [Virtuoso](http://virtuoso.openlinksw.com/).
 
 
-# Exercises
-
-## Data modeling for relational databases
+# Exercise: Data modeling for relational databases
 
 Sample topics:
 * Database that tracks which articles cite which other articles
