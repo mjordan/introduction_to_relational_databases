@@ -16,7 +16,7 @@ Relational databases organize data into multiple tables, and link the tables tog
 
 ![Books and authors](assets/BooksAuthors.jpg)
 
-This intermediate table is known as a "relation" or "join" table. For this method of breaking up data into multiple tables to work reliably, we need to ensure that each row in the books table and each row in the authors table can be referenced uniquely. To do this, we need to assign identifiers to each rown in the book and authors tables, and we use those identifiers to relate the two tables to each other in the third table. We will see some examples of these identifiers in the query examples below.
+This intermediate table (in this example, BookAuthors) is known as a "relation" or "join" table. For this method of breaking up data into multiple tables to work reliably, we need to ensure that each row in the books table and each row in the authors table can be referenced uniquely. To do this, we need to assign identifiers to each rown in the book and authors tables, and we use those identifiers to relate the two tables to each other in the third table. We will see some examples of these identifiers in the query examples below.
 
 "One-to-many" relationships don't use a third table. This type of relationship links two tables, one containing the data that is on the "one" side of the relationship and the other that is on the "many" side. For example, each book can have many editions, but each edition applies to only a single book:
 
@@ -29,6 +29,8 @@ The IDs used to uniquely identify the things described in tables are called "pri
 Putting together all of our tables, we get a database structure that can be represented like this:
 
 ![Books and editions](assets/BooksAuthorsEditions.jpg)
+
+Books, Authors, and Editions all have a unique ID (book_id, author_id, and edition_id respectively) that is used as their primary key, and Editions contains the foreign key book_id that links it to the Books table in a one-to-many relationship. The relation table BooksAuthors only has two columns, book_id and author_id, which are both foreign keys.
 
 Here are the tables, structured as illustrated above, with some data in them:
 
@@ -141,7 +143,7 @@ The results are:
 3 rows in set (0.01 sec)
 ```
 
-This query is more complex than the first one, because it is asking for data from multiple tables. It relates the tables using the clause `WHERE BooksAuthors.author_id = Authors.author_id`, which in relational database jargon is called a "join" query (not to be confused with the "join" table used to store many-to-many relationships.)
+This query is more complex than the first one, because it is asking for data from multiple tables. It relates the tables using the clause `WHERE BooksAuthors.author_id = Authors.author_id`, which in relational database jargon is called a "join" query (not to be confused with the join table used to store many-to-many relationships.)
 
 To find the book IDs, titles, and ISBNs that have editions published after (that is, greater than) 2003, we would use this SQL query:
 
