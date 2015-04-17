@@ -299,11 +299,9 @@ The process of developing the structure of a relational database is iterative. O
 
 Defining the entities in the database (the things that the database describes), their attributes, and their relationships to each other (e.g., one-to-many, many-to-many) can be done using several techniques. Many people like to start with simple lists of entities and attributes, and then translate those into Entity Relationship diagrams to better match the functionality of an RDBMS. The following section provides one concrete example of this method.
 
-## Entity-relationship modeling
+## Entity-relationship modelling
 
-List all entities (things) and their attributes
-
-Our goal in this example is to create a database that we can use to schedule classes in a set of academic courses. Any real school, college, university, or training center will have such a database. The database used in this example is _probably_ a lot simpler than the real databases used in these institutions.
+Our goal in this example of entity-relationship modelling is to create a database that we can use to schedule classes in a set of academic courses. Any real school, college, university, or training center will have such a database. The database used in this example is _probably_ a lot simpler than the real databases used in these institutions.
 
 We will begin by listing all of the things we need to include in our database:
 
@@ -347,15 +345,15 @@ Using the modifications made to our rough ER diagram, we can create a cleaner ve
 
 ## Normalization
 
-## First Normal Form
+### First Normal Form
 
 Each column/row intersection can contain only one value. In our class locations database, courses.instructor can only have one instructor ID. 
 
-## Second Normal Form
+### Second Normal Form
 
 Applies to association tables with a composite key. All non-key columns must describe the entire composite key.
 
-## Third Normal Form
+### Third Normal Form
 
 Second Normal Form for non-association tables. Non non-key column must be dependent on another non-key column.
 
@@ -363,16 +361,43 @@ Second Normal Form for non-association tables. Non non-key column must be depend
 
 Don't worry about these.
 
+## Testing databases
+
+[@todo: add some sample data, do some SQL queries.]
+
 # Populating and querying relational databases
+
+The principle way of interacting with relational databases is through SQL, the Structured Query Language. We've already seen a lot of SQL in this workshop - in the initial overview of how RDBMS work, in the section on tools for managing relational databases, and in the previous section.
 
 ```sql
 SELECT * FROM Authors ORDER by last_name;
 ```
 
+Most RDBMS management tools provide a simple interface for populating and updating individual tables, but they do not allow users to populate and update linked tables easily. For example, if you wanted to add a book entry to the database we saw in the overview section, you'd also want to add at least one linked record for the book's edition. Let's look again at the Editions table:
+
+```
++------------+---------+---------------------+----------------+
+| edition_id | book_id | date_of_publication | edition_number |
++------------+---------+---------------------+----------------+
+|          1 |       3 |                2001 | 1              |
+|          2 |       3 |                2003 | 2              |
+|          3 |       4 |                2003 | 1              |
+|          5 |       1 |                2000 | 1              |
+|          6 |       3 |                2005 | 3              |
+|          8 |       2 |                2012 | 1              |
+|          9 |       3 |                2009 | 4              |
++------------+---------+---------------------+----------------+
+```
+If you are adding a row to this table, you need to know which book ID to use to link the new entry to the corresponding book. The tools described above for managing relational databases don't provide automatic ways to let you pick from a list of book IDs (or better yet, book titles that correspond to book IDs) when you're editing or adding an edition entry. The professional version of Adminer provides this feature, but in this workshop we're using the free version.
+
+A free and open source RDBMS management application that does make it easy to select related rows from a linked table is [Xataface](http://xataface.com/). The screen shot below was taken from a database that uses Xataface, which, coincidentally, also describes books, specifcally, a set of books published in the late 1700s up to the end of the 1800s associated with a particular region in England. The "Places" form depicted here exists within the form used to edit book entries. The database contains a "books" table, a "publication_lace" table, and a more general "place" table. The example below shows how the user can choose a value from either of those tables directly within the form used to edit the book that the places are associated with:
+
 
 ![Example of an autocomplete field for selecting values from linked tables](assets/xataface_linked_table_example.png)
 ![Spacer image](assets/spacer.jpg)
 Example of a user interface built using [Xataface](http://xataface.com/) for selecting values from linked tables. Image courtesy of John Dingle and Margaret Linley.
+
+In the exercises that follow, we'll need to work around this limitation of the tool we are using by opening multiple web browser windows so we can see all the tables we are using in our queries. Your instructor will demonstrate this work around in person.
 
 # Exercise: Using SQL
 
@@ -435,7 +460,7 @@ WHERE `shape_id` = '1';
 
 
 
-# Exercise: Selecting data from the Classes database
+# Exercise: Selecting data from the Class Scheduling database
 
 In this exercise, we will perform some SELECT queries on the Classes database we modelled earlier in the workshop. Your instructor will provide the URL of the tool you will use, plus login credentials for the tool.
 
