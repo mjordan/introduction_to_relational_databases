@@ -326,7 +326,9 @@ Class scheduling database, whose purpose is to aid in the scheduling of classes 
   * Department [Do we need department here and in Courses?]
   * Email address
 
-[@todo: Insert complete ER Diagram version of the above list, for MySQL Workbench at least and maybe Adminer too?]
+
+![Rough ER diagram with notes](assets/classes_modelling_example.jpg)
+
 
 ## Normalization
 
