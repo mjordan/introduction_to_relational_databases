@@ -309,8 +309,11 @@ MySQL Workbench schema view
 ![MySQL Workbench ER diagram view](assets/mysqlworkbench_er_diagram.png)
 MySQL Workbench ER diagram view
 
+##### Using managemant applications
 
-Most RDBMS management tools provide a simple interface for populating and updating individual tables, but they do not allow users to populate and update linked tables easily. For example, if you wanted to add a book entry to the database we saw in the overview section, you'd also want to add at least one linked record for the book's edition. Let's look again at the Editions table:
+The intended audience of RDBMS management applications is database developers and administrators. They are not designed for allowing a wide variety of users to interact with databases. Most end users acces databases through applications that easier to use and more specific to the content stored in the database than through general-purpose database management applicatoins like phpMyAdmin or MySQL Workbench. We will survey some of the tools used to create web-based access to databases in the "Web application frameworks" section below.
+
+The most obvious limitation to most RDBMS management tools is that while they provide a simple interface for populating and updating individual tables, they do not allow users to populate and update linked tables easily. For example, if you wanted to add a book entry to the database we saw in the overview section, you'd also want to add at least one linked record for the book's edition. Let's look again at the Editions table:
 
 ```
 +------------+---------+---------------------+----------------+
@@ -327,14 +330,12 @@ Most RDBMS management tools provide a simple interface for populating and updati
 ```
 If you are adding a row to this table, you need to know which book ID to use to link the new entry to the corresponding book. The tools described above for managing relational databases don't provide automatic ways to let you pick from a list of book IDs (or better yet, book titles that correspond to book IDs) when you're editing or adding an edition entry. The professional version of Adminer provides this feature, but in this workshop we're using the free version.
 
-A free and open source RDBMS management application that does make it easy to select related rows from a linked table is [Xataface](http://xataface.com/). The screen shot below was taken from a database that uses Xataface, which, coincidentally, also describes books, specifcally, a set of books published in the late 1700s up to the end of the 1800s associated with a particular region in England. The "Places" form depicted here exists within the form used to edit book entries. The database contains a "books" table, a "publication_lace" table, and a more general "place" table. The example below shows how the user can choose a value from either of those tables directly within the form used to edit the book that the places are associated with:
+In the exercises using SQL below, we'll need to work around this limitation of the tool we are using by opening multiple web browser windows so we can see all the tables we are using in our queries. Your instructor will demonstrate this work around in person.
 
+One web-based RDBMS management tool that does not have this limitation is [Xataface](http://xataface.com/). The screen shot below was taken from a database that uses Xataface. (The database, coincidentally, also describes books, specifcally, a set of books published in the late 1700s up to the end of the 1800s associated with a particular region in England.) The "Places" form depicted here exists within the form used to edit book entries. The database contains a "books" table, a "publication_place" table, and a more general "place" table. The example below shows how the user can choose a value from either of those tables directly within the form used to edit the book that the places are associated with:
 
 ![Example of an autocomplete field for selecting values from linked tables](assets/xataface_linked_table_example.png)
 Example of a user interface built using [Xataface](http://xataface.com/) for selecting values from linked tables. Image courtesy of John Dingle and Margaret Linley.
-
-In the exercises using SQL below, we'll need to work around this limitation of the tool we are using by opening multiple web browser windows so we can see all the tables we are using in our queries. Your instructor will demonstrate this work around in person.
-
 
 
 ## Data modeling for relational databases
