@@ -1,4 +1,4 @@
-# Teaching a tutorial using this material
+# Teaching using this material
 
 This README file contains information that people who wish to reuse this workshop material will find useful.
 
