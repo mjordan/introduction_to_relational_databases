@@ -569,18 +569,18 @@ Many web application frameworks provide tools to generate web forms for creating
 
 ## Relational databases compared to other types of databases
 
-Relational databases are remarkably flexible and powerful, but they have limits. Other types of databases that you will hear of include:
+Relational databases are remarkably flexible and powerful, but they are not the best tool for every job. Other types of databases that you will hear of include:
 
 * NoSQL databases
   * "NoSLQ" is an acronym for "Not only SQL." These databases store non-tabular data. Examples include [CouchDB](http://couchdb.apache.org/), [MongoDB](https://www.mongodb.org/). Typical applications for NoSQL databases include serving large-scale structured data or as complements to relational database applications. As a class of products, NoSQL databases have no standardized query language - each product uses its own language for adding, modifying, and retrieving data.
 * XML databases
   * XML databases store and query data in XML documents, not in tables. A typical application for XML databases is to provide advanced queries against a set of XML documents using the [XPath](http://en.wikipedia.org/wiki/XPath) or [XQuery](http://en.wikipedia.org/wiki/XQuery) languages. Examples of XML databases include [eXist](http://exist-db.org/) and [BaseX](http://basex.org/).
 * Triplestores
-  * Triplestore store statements comprised of subject, predicate, object as defined by [RDF](http://www.w3.org/TR/2014/NOTE-rdf11-primer-20140225/) (the Resource Description Framework). A typical application is providing a search endpoint for [Linked Data](http://linkeddata.org/) via the [SPARQL](http://en.wikipedia.org/wiki/SPARQL) query language. Examples of RDF triplestores include [Fuseki](http://jena.apache.org/documentation/fuseki2/index.html) and [Virtuoso](http://virtuoso.openlinksw.com/).
+  * Triplestore store statements comprised of a subject, predicate, and object as defined by [RDF](http://www.w3.org/TR/2014/NOTE-rdf11-primer-20140225/) (the Resource Description Framework). A typical application is providing a search endpoint for [Linked Data](http://linkeddata.org/) via the [SPARQL](http://en.wikipedia.org/wiki/SPARQL) query language. Examples of RDF triplestores include [Fuseki](http://jena.apache.org/documentation/fuseki2/index.html) and [Virtuoso](http://virtuoso.openlinksw.com/).
 * Fulltext indexing engines
   * Fulltext indexing engines focus on efficient queries over large amounts of strucutured or unstructured text, something relational databases have never been really good at. Two of the most popular fulltext search engines are [Solr](http://lucene.apache.org/solr/) and [Elasticsearch](https://www.elastic.co/products/elasticsearch).
 
-Relational databases can exist and work with any of these technologies in the same application. For example, the general repository platform [Islandora](http://islandora.ca/) uses a relational database (to power the Drupal front end), a triplestore (to store and query relationship information such as which pages are in a specific book), and the Solr fulltext indexing engine (for end-user queries against the content of collections and objects managed by Islandora).
+Relational databases can exist and work with any of these technologies in the same application. For example, the general repository platform [Islandora](http://islandora.ca/) uses a relational database (to power its Drupal website), a triplestore (to store and query relationship information such as which pages are in a specific book), and the Solr fulltext indexing engine (for end-user queries against the content of collections and individual objects).
 
 
 ## Exercise: Data modeling for relational databases
