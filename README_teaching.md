@@ -6,11 +6,11 @@ The 4-hour workshop this material was originally developed for given for a group
 
 ## Licenses
 
-The text and images in this Git repostitory may be reused under the terms of the http://creativecommons.org/licenses/by/4.0/ license. Scripts and other content in the `scripts` directory is in the public domain.
+Except where otherwise noted, the text and images in this Git repostitory may be reused under the terms of the http://creativecommons.org/licenses/by/4.0/ license. Scripts and other content in the `scripts` directory is in the public domain.
 
-## Providing your students with databases they can use during the tutorial
+## Providing your students with databases they can use
 
-This tutorial contains hands-on excersises in using databases, specifically, MySQL databases accessed via the [Adminer](http://www.adminer.org/) web-based management application, which provides full database administration functionality in a single PHP file. Instructors will need to provision a web server that can run MySQL and Adminer (any standard VPS or IaaS server can do that).
+This tutorial contains hands-on excersises in using databases, specifically, MySQL databases accessed via the [Adminer](http://www.adminer.org/) web-based management application, which provides full database administration functionality in a single PHP file. Instructors will need to provision a web server that can run MySQL and Adminer (which any standard VPS or IaaS server can do).
 
 The createdbs.sh script provided in the `scripts` directory lets you create a set of MySQL databases and corresponding user accounts with full privileges on those databases. Feel free to modify it to suit your needs.
 
