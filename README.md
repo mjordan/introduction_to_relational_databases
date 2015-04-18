@@ -202,9 +202,7 @@ You then issue SQL and MySQL-specific commands within the MySQL shell, like this
 
 ![MySQL command-line client](assets/mysql_client_query.png)
 
-Command line clients (e.g., mysql and psql), web-based management apps (e.g. web apps like [PHPMyAdmin](http://www.phpmyadmin.net/home_page/index.php) and [Adminer](http://www.adminer.org/), desktop management apps like [MySQL Workbench](https://www.mysql.com/products/workbench/)), custom applications.
-
-The following is an "SQL file" (also known as a dump or script) produced by phpMyAdmin:
+Other command-line clients exist for specific purposes. For example, a database developer or administrator would use the `mysqldump` command to produce a "dump" of a MySQL database for backup purposes or for moving to a different server. The dump contains all the SQL commands required to recreate the database:
 
 ```sql
 -- phpMyAdmin SQL Dump
@@ -289,12 +287,12 @@ CREATE TABLE IF NOT EXISTS `locations` (
 
 ##### Web-based RDBMS management applications
 
-The following screenshot show the database in Adminer:
+The following screenshot show the database in [Adminer](http://www.adminer.org/):
 
 ![Adminer tables view](assets/adminer_tables_view.png)
 
 
-This is a screenshot from phpMyAdmin, a popular web-based management application for MySQL databaeses, showing the rows in a table:
+This is a screenshot from [PHPMyAdmin](http://www.phpmyadmin.net/home_page/index.php), a popular web-based management application for MySQL databaeses, showing the rows in a table:
 
 ![Adminer tables view](assets/phpmyadmin_rows_view.png)
 
@@ -302,6 +300,8 @@ This is a screenshot from phpMyAdmin, a popular web-based management application
 
 
 ##### Desktop RDBMS management applications
+
+[MySQL Workbench](https://www.mysql.com/products/workbench/):
 
 ![MySQL Workbench schema view](assets/mysqlworkbench_schema.png)
 MySQL Workbench schema view
