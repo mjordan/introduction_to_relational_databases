@@ -297,8 +297,6 @@ This is a screenshot from [PHPMyAdmin](http://www.phpmyadmin.net/home_page/index
 ![Adminer tables view](assets/phpmyadmin_rows_view.png)
 
 
-
-
 ##### Desktop RDBMS management applications
 
 [MySQL Workbench](https://www.mysql.com/products/workbench/):
@@ -309,9 +307,9 @@ MySQL Workbench schema view
 ![MySQL Workbench ER diagram view](assets/mysqlworkbench_er_diagram.png)
 MySQL Workbench ER diagram view
 
-##### Using managemant applications
+##### Limitations of RDBMS managemant applications
 
-The intended audience of RDBMS management applications is database developers and administrators. They are not designed for allowing a wide variety of users to interact with databases. Most end users acces databases through applications that easier to use and more specific to the content stored in the database than through general-purpose database management applicatoins like phpMyAdmin or MySQL Workbench. We will survey some of the tools used to create web-based access to databases in the "Web application frameworks" section below.
+The intended audience of RDBMS management applications is database developers and administrators. They are not designed for allowing a wide variety of users to interact with databases; rather, their focus in on the functionality that developers and administrators need. Most general end users will want to access databases through applications that easier to use and more specific to the content stored in the database than general-purpose database management applications like phpMyAdmin or MySQL Workbench. We will survey some of the tools used to create web-based access to databases in the "Web application frameworks" section below.
 
 The most obvious limitation to most RDBMS management tools is that while they provide a simple interface for populating and updating individual tables, they do not allow users to populate and update linked tables easily. For example, if you wanted to add a book entry to the database we saw in the overview section, you'd also want to add at least one linked record for the book's edition. Let's look again at the Editions table:
 
@@ -335,7 +333,7 @@ In the exercises using SQL below, we'll need to work around this limitation of t
 One web-based RDBMS management tool that does not have this limitation is [Xataface](http://xataface.com/). The screen shot below was taken from a database that uses Xataface. (The database, coincidentally, also describes books, specifcally, a set of books published in the late 1700s up to the end of the 1800s associated with a particular region in England.) The "Places" form depicted here exists within the form used to edit book entries. The database contains a "books" table, a "publication_place" table, and a more general "place" table. The example below shows how the user can choose a value from either of those tables directly within the form used to edit the book that the places are associated with:
 
 ![Example of an autocomplete field for selecting values from linked tables](assets/xataface_linked_table_example.png)
-Example of a user interface built using [Xataface](http://xataface.com/) for selecting values from linked tables. Image courtesy of John Dingle and Margaret Linley.
+Image courtesy of John Dingle and Margaret Linley.
 
 
 ## Data modeling for relational databases
