@@ -2,7 +2,7 @@
 
 This README file contains information that people who wish to reuse this workshop material will find useful.
 
-The 4-hour workshop this material was originally developed for given for a group of Digital Humanists. The focus in on showing how relational databases work and how they are commonly used. If you are looking for a "gentle" introduction to relational databases (if there is such a thing) for more general audiences, you might find the material in this Git repository useful. There is a lot of much more technical, detailed material out there that will be suitable for different kinds of audiences, such as Adrianne Watt and Nelson Eng's open textbook [Database Design](http://opentextbc.ca/dbdesign01/).
+The 4-hour workshop this material was originally developed for given for a group of Digital Humanists. The focus in on showing how relational databases work and how they are commonly used. If you are looking for a "gentle" introduction to relational databases (if there is such a thing) for more general audiences, you might find the material in this Git repository useful. There is a lot of much more technical, detailed material out there that will be suitable for different kinds of audiences, such as Adrienne Watt and Nelson Eng's open textbook [Database Design](http://opentextbc.ca/dbdesign01/).
 
 ## Licenses
 
