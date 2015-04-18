@@ -432,7 +432,7 @@ If we put some thought into this short list of entities, and add to each one the
   * Department [Do we need department here and in Courses?]
   * Email address
 
-We can then use this list as a basis for rough ER diagram, which provides us with an opportunity to think about the relationships between the entities using a more formalized approach. In this example, the person doing the modelling created a rough ER diagram using [Lucidchart](https://www.lucidchart.com), printed it, and wrote notes on it to resolve the questions that came up when adding entity attributes to the list:
+We can then use this list as a basis for rough ER diagram, which provides us with an opportunity to think about the relationships between the entities using a more formalized approach. In this example, the person doing the modelling created a rough ER diagram using [Lucidchart](https://www.lucidchart.com), printed it, and wrote notes on it to define the relationships between the entities and to resolve the questions that came up when adding attributes to the list:
 
 ![Rough ER diagram with notes](assets/classes_modelling_example.jpg)
 
