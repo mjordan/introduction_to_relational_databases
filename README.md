@@ -2,7 +2,7 @@
 
 ## Overview of the workshop
 
-In this 4-hour workshop, participants will learn the basics of data modelling for relational databases, the relational database development process, and querying relational databases using SQL (Structured Query Language). The workshop will also present an overview of how relational databases are integrated into websites and other types of applications. The workshop will include a number of hands-on exercises and the chance to create, populate, and query a simple database.
+In this 4-hour workshop, participants will learn the basics of data modeling for relational databases, the relational database development process, and querying relational databases using SQL (Structured Query Language). The workshop will also present an overview of how relational databases are integrated into websites and other types of applications. The workshop will include a number of hands-on exercises and the chance to create, populate, and query a simple database.
 
 ## How relational databases work
 
@@ -397,9 +397,9 @@ The process of developing the structure of a relational database is iterative. O
 
 Defining the entities in the database (the things that the database describes), their attributes, and their relationships to each other (e.g., one-to-many, many-to-many) can be done using several techniques. Many people like to start with simple lists of entities and attributes, and then translate those into Entity Relationship diagrams to better match the functionality of an RDBMS. The following section provides one concrete example of this method.
 
-### Entity-relationship modelling
+### Entity-relationship modeling
 
-Our goal in this example of entity-relationship modelling is to create a database that we can use to schedule classes in a set of academic courses. Any real school, college, university, or training center will have such a database. The database used in this example is _probably_ a lot simpler than the real databases used in these institutions.
+Our goal in this example of entity-relationship modeling is to create a database that we can use to schedule classes in a set of academic courses. Any real school, college, university, or training center will have such a database. The database used in this example is _probably_ a lot simpler than the real databases used in these institutions.
 
 We will begin by listing all of the things we need to include in our database:
 
@@ -432,13 +432,13 @@ If we put some thought into this short list of entities, and add to each one the
   * Department [Do we need department here and in Courses?]
   * Email address
 
-We can then use this list as a basis for rough ER diagram, which provides us with an opportunity to think about the relationships between the entities using a more formalized approach. In this example, the person doing the modelling created a rough ER diagram using [Lucidchart](https://www.lucidchart.com), printed it, and wrote notes on it to define the relationships between the entities and to resolve the questions that came up when adding attributes to the list:
+We can then use this list as a basis for rough ER diagram, which provides us with an opportunity to think about the relationships between the entities using a more formalized approach. In this example, the person doing the modeling created a rough ER diagram using [Lucidchart](https://www.lucidchart.com), printed it, and wrote notes on it to define the relationships between the entities and to resolve the questions that came up when adding attributes to the list:
 
-![Rough ER diagram with notes](assets/classes_modelling_example.jpg)
+![Rough ER diagram with notes](assets/classes_modeling_example.jpg)
 
 Using the modifications made to our rough ER diagram, the modeller then updated the ER diagram before moving on to normalization and testing:
 
-![Revised ER diagram](assets/classes_modelling_example_revised_erd.jpg)
+![Revised ER diagram](assets/classes_modeling_example_revised_erd.jpg)
 
 
 ### Normalization
@@ -577,6 +577,10 @@ Relational databases are remarkably flexible and powerful, but they have limits.
   * XML databases store and query data in XML documents, not in tables. A typical application for XML databases is to provide advanced queries against a set of XML documents using the [XPath](http://en.wikipedia.org/wiki/XPath) or [XQuery](http://en.wikipedia.org/wiki/XQuery) languages. Examples of XML databases include [eXist](http://exist-db.org/) and [BaseX](http://basex.org/).
 * Triplestores
   * Triplestore store statements comprised of subject, predicate, object as defined by [RDF](http://www.w3.org/TR/2014/NOTE-rdf11-primer-20140225/) (the Resource Description Framework). A typical application is providing a search endpoint for [Linked Data](http://linkeddata.org/) via the [SPARQL](http://en.wikipedia.org/wiki/SPARQL) query language. Examples of RDF triplestores include [Fuseki](http://jena.apache.org/documentation/fuseki2/index.html) and [Virtuoso](http://virtuoso.openlinksw.com/).
+ * Fulltext indexing engines
+   * Fulltext indexing engines focus on efficient queries over large amounts of strucutured or unstructured text, something relational databases have never been really good at. Two of the most popular fulltext search engines are [Solr](http://lucene.apache.org/solr/) and [Elasticsearch](https://www.elastic.co/products/elasticsearch).
+
+Relational databases can exist and work with any of these technologies in the same application. For example, the general repository platform [Islandora](http://islandora.ca/) uses a relational database (to power the Drupal front end), a triplestore (to store and query relationship information such as which pages are in a specific book), and the Solr fulltext indexing engine (for end-user queries against the content of collections and objects managed by Islandora).
 
 
 ## Exercise: Data modeling for relational databases
