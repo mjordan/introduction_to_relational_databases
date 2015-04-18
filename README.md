@@ -1,10 +1,12 @@
-# Overview of the workshop
+# Introduction to Relational Databases
+
+## Overview of the workshop
 
 In this 4-hour workshop, participants will learn the basics of data modelling for relational databases, the relational database development process, and querying relational databases using SQL (Structured Query Language). The workshop will also present an overview of how relational databases are integrated into websites and other types of applications. The workshop will include a number of hands-on exercises and the chance to create, populate, and query a simple database.
 
-# How relational databases work
+## How relational databases work
 
-## Tables, relationships, and IDs
+### Tables, relationships, and IDs
 
 Relational databases strucutre data in tables, and provide mechanisms for linking (relating) those tables together to so that the data can be queried and managed efficiently. For example, if we wanted to manage a list of books, we would create a table that contained some data about those books:
 
@@ -93,7 +95,7 @@ Editions
 +------------+---------+---------------------+----------------+
 ```
 
-## Querying tables using SQL
+### Querying tables using SQL
 
 After we have populated the database with data (we'll explain how to do that later), we can query it using SQL (the Structured Query Language). For example, to view all information stored in the Authors table, sorted by last name, we use the following query:
 
@@ -168,11 +170,11 @@ which returns the folowing results:
 ```
 You'll notice repetition in the book_id, title, and ISBN columns in the results. Those columns are the ones we're asking for in the query, so the response is correct, since we're also asking for the date of publication from the Editions table, which in our results contains the correct values.
 
-## Relational database platforms
+### Relational database management systems
 
-### Common RDBMS systems
+#### Common systems
 
-There are many proprietary and open source relational database management systems (RDBMS). The most common include:
+There are many proprietary and open source relational database management systems (RDBMSs). The most common include:
 
 * [MySQL](https://www.mysql.com/)
 * [PostgreSQL](http://www.postgresql.org/)
@@ -185,7 +187,20 @@ There are many proprietary and open source relational database management system
 
 While SQL is an [international standard](http://en.wikipedia.org/wiki/SQL#Standardization), and most of the systems listed above implment it thoroughly, every RDBMS has features or extensions to SQL that differentiate it from its competitors. Some, like Microsoft Access and Filemaker, include full graphical user interfaces to creating and querying databases. Others, like MySQL and PostgreSQL, include only a back-end server and command-line clients for querying and administration. It is common for third-party tools to be used to interact with these databases. Some of these tools are described in the next section.
 
-### Tools for managing relational databases
+
+#### Interacting with RDBMSs
+
+In this workshop, we'll be interacting with our databases using a web-based management tool called [Adminer](http://www.adminer.org/). However, it is important to note that there are a variety of ways to interact with relational databases.
+
+##### Command-line clients
+
+MySQL, PostgreSQL, and SQLite come with a command-line client. To invoke MySQL's client as the database's root user on Linux, you run the command `mysql -uroot -p`. After entering the root user's password, you would enter the MySQL shell, which looks like this:
+
+![MySQL command-line client](assets/mysql_client.png)
+
+You then issue SQL and MySQL-specific commands within the MySQL shell, like this:
+
+![MySQL command-line client](assets/mysql_client_query.png)
 
 Command line clients (e.g., mysql and psql), web-based management apps (e.g. web apps like [PHPMyAdmin](http://www.phpmyadmin.net/home_page/index.php) and [Adminer](http://www.adminer.org/), desktop management apps like [MySQL Workbench](https://www.mysql.com/products/workbench/)), custom applications.
 
@@ -272,13 +287,21 @@ CREATE TABLE IF NOT EXISTS `locations` (
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 ```
 
-The following screenshots show the database in Adminer and in MySQL Workbench:
+##### Web-based RDBMS management applications
+
+The following screenshot show the database in Adminer:
 
 ![Adminer tables view](assets/adminer_tables_view.png)
-Adminer tables view
 
-![Adminer schema view](assets/adminer_schema_view.png)
-Adminer schema view
+
+This is a screenshot from phpMyAdmin, a popular web-based management application for MySQL databaeses, showing the rows in a table:
+
+![Adminer tables view](assets/phpmyadmin_rows_view.png)
+
+
+
+
+##### Desktop RDBMS management applications
 
 ![MySQL Workbench schema view](assets/mysqlworkbench_schema.png)
 MySQL Workbench schema view
@@ -286,12 +309,40 @@ MySQL Workbench schema view
 ![MySQL Workbench ER diagram view](assets/mysqlworkbench_er_diagram.png)
 MySQL Workbench ER diagram view
 
-# Data modeling for relational databases
+
+Most RDBMS management tools provide a simple interface for populating and updating individual tables, but they do not allow users to populate and update linked tables easily. For example, if you wanted to add a book entry to the database we saw in the overview section, you'd also want to add at least one linked record for the book's edition. Let's look again at the Editions table:
+
+```
++------------+---------+---------------------+----------------+
+| edition_id | book_id | date_of_publication | edition_number |
++------------+---------+---------------------+----------------+
+|          1 |       3 |                2001 | 1              |
+|          2 |       3 |                2003 | 2              |
+|          3 |       4 |                2003 | 1              |
+|          5 |       1 |                2000 | 1              |
+|          6 |       3 |                2005 | 3              |
+|          8 |       2 |                2012 | 1              |
+|          9 |       3 |                2009 | 4              |
++------------+---------+---------------------+----------------+
+```
+If you are adding a row to this table, you need to know which book ID to use to link the new entry to the corresponding book. The tools described above for managing relational databases don't provide automatic ways to let you pick from a list of book IDs (or better yet, book titles that correspond to book IDs) when you're editing or adding an edition entry. The professional version of Adminer provides this feature, but in this workshop we're using the free version.
+
+A free and open source RDBMS management application that does make it easy to select related rows from a linked table is [Xataface](http://xataface.com/). The screen shot below was taken from a database that uses Xataface, which, coincidentally, also describes books, specifcally, a set of books published in the late 1700s up to the end of the 1800s associated with a particular region in England. The "Places" form depicted here exists within the form used to edit book entries. The database contains a "books" table, a "publication_lace" table, and a more general "place" table. The example below shows how the user can choose a value from either of those tables directly within the form used to edit the book that the places are associated with:
+
+
+![Example of an autocomplete field for selecting values from linked tables](assets/xataface_linked_table_example.png)
+Example of a user interface built using [Xataface](http://xataface.com/) for selecting values from linked tables. Image courtesy of John Dingle and Margaret Linley.
+
+In the exercises using SQL below, we'll need to work around this limitation of the tool we are using by opening multiple web browser windows so we can see all the tables we are using in our queries. Your instructor will demonstrate this work around in person.
+
+
+
+## Data modeling for relational databases
 
 * Entity-relationship modeling
 * Normalization
 
-## Relational database development process
+### Relational database development process
 
 The process of developing the structure of a relational database is iterative. Only the simplest databases do not require repeated testing and adjustment before they meet their intended goals. This diagram represents the various steps you should consider taking while developing your database, starting with "Define entities and their attributes" and moving clockwise:
 
@@ -299,7 +350,7 @@ The process of developing the structure of a relational database is iterative. O
 
 Defining the entities in the database (the things that the database describes), their attributes, and their relationships to each other (e.g., one-to-many, many-to-many) can be done using several techniques. Many people like to start with simple lists of entities and attributes, and then translate those into Entity Relationship diagrams to better match the functionality of an RDBMS. The following section provides one concrete example of this method.
 
-## Entity-relationship modelling
+### Entity-relationship modelling
 
 Our goal in this example of entity-relationship modelling is to create a database that we can use to schedule classes in a set of academic courses. Any real school, college, university, or training center will have such a database. The database used in this example is _probably_ a lot simpler than the real databases used in these institutions.
 
@@ -343,63 +394,30 @@ Using the modifications made to our rough ER diagram, we can create a cleaner ve
 ![Revised ER diagram](assets/classes_modelling_example_revised_erd.jpg)
 
 
-## Normalization
+### Normalization
 
-### First Normal Form
+#### First Normal Form
 
 Each column/row intersection can contain only one value. In our class locations database, courses.instructor can only have one instructor ID. 
 
-### Second Normal Form
+#### Second Normal Form
 
 Applies to association tables with a composite key. All non-key columns must describe the entire composite key.
 
-### Third Normal Form
+#### Third Normal Form
 
 Second Normal Form for non-association tables. Non non-key column must be dependent on another non-key column.
 
-## Fourth and Fifth Normal Forms
+#### Fourth and Fifth Normal Forms
 
 Don't worry about these.
 
-## Testing databases
+### Testing databases
 
 [@todo: add some sample data, do some SQL queries.]
 
-# Populating and querying relational databases
 
-The principle way of interacting with relational databases is through SQL, the Structured Query Language. We've already seen a lot of SQL in this workshop - in the initial overview of how RDBMS work, in the section on tools for managing relational databases, and in the previous section.
-
-```sql
-SELECT * FROM Authors ORDER by last_name;
-```
-
-Most RDBMS management tools provide a simple interface for populating and updating individual tables, but they do not allow users to populate and update linked tables easily. For example, if you wanted to add a book entry to the database we saw in the overview section, you'd also want to add at least one linked record for the book's edition. Let's look again at the Editions table:
-
-```
-+------------+---------+---------------------+----------------+
-| edition_id | book_id | date_of_publication | edition_number |
-+------------+---------+---------------------+----------------+
-|          1 |       3 |                2001 | 1              |
-|          2 |       3 |                2003 | 2              |
-|          3 |       4 |                2003 | 1              |
-|          5 |       1 |                2000 | 1              |
-|          6 |       3 |                2005 | 3              |
-|          8 |       2 |                2012 | 1              |
-|          9 |       3 |                2009 | 4              |
-+------------+---------+---------------------+----------------+
-```
-If you are adding a row to this table, you need to know which book ID to use to link the new entry to the corresponding book. The tools described above for managing relational databases don't provide automatic ways to let you pick from a list of book IDs (or better yet, book titles that correspond to book IDs) when you're editing or adding an edition entry. The professional version of Adminer provides this feature, but in this workshop we're using the free version.
-
-A free and open source RDBMS management application that does make it easy to select related rows from a linked table is [Xataface](http://xataface.com/). The screen shot below was taken from a database that uses Xataface, which, coincidentally, also describes books, specifcally, a set of books published in the late 1700s up to the end of the 1800s associated with a particular region in England. The "Places" form depicted here exists within the form used to edit book entries. The database contains a "books" table, a "publication_lace" table, and a more general "place" table. The example below shows how the user can choose a value from either of those tables directly within the form used to edit the book that the places are associated with:
-
-
-![Example of an autocomplete field for selecting values from linked tables](assets/xataface_linked_table_example.png)
-![Spacer image](assets/spacer.jpg)
-Example of a user interface built using [Xataface](http://xataface.com/) for selecting values from linked tables. Image courtesy of John Dingle and Margaret Linley.
-
-In the exercises that follow, we'll need to work around this limitation of the tool we are using by opening multiple web browser windows so we can see all the tables we are using in our queries. Your instructor will demonstrate this work around in person.
-
-# Exercise: Using SQL
+## Exercise: Using SQL
 
 In this exercise, we will create a database that contains a single table describing shapes, populate the table with some data, and modify some of the data. Your instructor will provide the URL of the tool you will use, plus login credentials for the tool.
 
@@ -413,7 +431,7 @@ The ER diagram for the table (including the data types for each column) is:
 * example_picture_url: To popluate this field, you will need to find a picture of the shape on the Web.
 * real_world_example: Enter the name of an object that has this shape, e.g., for 'circle' you could use 'Frisbee'
 
-## Creating a table
+### Creating a table
 
 Won't be using SQL, we'll be using Adminer's web interface, but the SQL would be:
 
@@ -432,7 +450,7 @@ This is what you should see in Adminer:
 
 ![Creating a table in Adminer](assets/using_sql_exercise_creating_table.png)
 
-## Inserting data
+### Inserting data
 
 We'll use raw SQL to add (INSERT) a row into the table. Click on the "SQL command" link on the left-hand side of the Adminer interface and enter this:
 
@@ -441,7 +459,7 @@ INSERT INTO `shapes` (`name`, `number_straight_sides`, `example_picture_url`, `r
 VALUES ('square', '4', 'http://www.mlahanas.de/Greeks/images/sq1.jpg', 'Window');
 ```
 
-## Modifying data
+### Modifying data
 
 ```sql
 UPDATE `shapes` SET
@@ -449,18 +467,18 @@ UPDATE `shapes` SET
 WHERE `shape_id` = '1';
 ```
 
-## Deleting data
+### Deleting data
 
 ```sql
 DELETE FROM `shapes`
 WHERE `shape_id` = '1';
 ```
 
-## Selecting data
+### Selecting data
 
 
 
-# Exercise: Selecting data from the Class Scheduling database
+## Exercise: Selecting data from the Class Scheduling database
 
 In this exercise, we will perform some SELECT queries on the Classes database we modelled earlier in the workshop. Your instructor will provide the URL of the tool you will use, plus login credentials for the tool.
 
@@ -468,11 +486,11 @@ In this exercise, we will perform some SELECT queries on the Classes database we
 
 2. Find all the 
 
-# Integrating relational databases into applications
+## Integrating relational databases into applications
 
 Now that we've seen how relational databases organize data, and how to use SQL to add, update, delete, and select data, we will take a look at how two well-known applications use relational databases, and then survey some tools commonly used to create custom Web-based database applications.
 
-## Wordpress
+### Wordpress
 
 Wordpress is a popular blogging and Content Management System that powers a [very large proportion](https://om4.com.au/wordpress/market-share/) of websites. Wordpress, like many other open-source products, makes its [core database ER diagram](https://codex.wordpress.org/images/9/97/WP3.8-ERD.png) available.
 
@@ -480,13 +498,13 @@ This diagram shows us that rows in the wp_posts table are on the "one" side of a
 
 Also of note is the use of several lookup tables (wp_usermeta, wp_commentmeta, and wp_postmeta) that use "[key-value](http://en.wikipedia.org/wiki/Attribute-value_pair)" pattern to define rows. Tables that use this pattern define a column for keys and a column for values. In each row, the key is the name of an attribute and the value is the content of the attribute. Using this structure, the table can store date whose key or name is not known when the table was designed and created. Tables that use key-value structure are very flexible, but SQL queries used to manage them and select data from them are more complicated than ones that use predictable column names.
 
-## Firefox
+### Firefox
 
 The Firefox web browser uses an SQLite database, which is bundled with Firefox, to manage users' history, bookmarks, and annotations. Information on how this database works, include its [ER diagram](http://people.mozilla.org/~dietrich/places-erd.png), is available on the [Mozilla Developer Network](https://developer.mozilla.org/en-US/docs/Mozilla/Tech/Places) website.
 
 Firefox's use of SQLite demostrates that relational databases can be used in desktop applications as well as in web-based applications like blogs. Firefox is not the only product that uses SQLite; according to [SQLite's website](http://www.sqlite.org/mostdeployed.html), it is also used in Mac OSX, Skype, and on many types of smartphones. This page claims that "it is likely that SQLite is the most widely deployed SQL database engine in the world."
 
-## Web application frameworks
+### Web application frameworks
 
 Many application development frameworks are availble that provide tools for integrating relational databases into web applications. If you were to develop a relational database to use in your research, and you wanted to have that database live on the web, you would likely need to use (or pay someone else to use) a web application framework to create a useful application for your database's users to interact with it.
 
@@ -502,7 +520,7 @@ These toolkits use a technology called "object-relational mapping" (ORM) to mana
 
 Many web application frameworks provide tools to generate web forms for creating, updating, and deleting rows in the database, and for providing other ways for users to interact with the database. In many ways, these frameworks are so popular because of the efficiency they bring to creating relational database applications for the web and for the tools they provide that allow developers to avoid direct, low-level interaction with the RDBMS itself.
 
-# Relational databases compared to other types of databases
+## Relational databases compared to other types of databases
 
 Relational databases are remarkably flexible and powerful, but they have limits. Other types of databases that you will hear of include:
 
@@ -514,7 +532,7 @@ Relational databases are remarkably flexible and powerful, but they have limits.
   * Triplestore store statements comprised of subject, predicate, object as defined by [RDF](http://www.w3.org/TR/2014/NOTE-rdf11-primer-20140225/) (the Resource Description Framework). A typical application is providing a search endpoint for [Linked Data](http://linkeddata.org/) via the [SPARQL](http://en.wikipedia.org/wiki/SPARQL) query language. Examples of RDF triplestores include [Fuseki](http://jena.apache.org/documentation/fuseki2/index.html) and [Virtuoso](http://virtuoso.openlinksw.com/).
 
 
-# Exercise: Data modeling for relational databases
+## Exercise: Data modeling for relational databases
 
 Sample topics:
 * Database that tracks which articles cite which other articles
@@ -522,6 +540,6 @@ Sample topics:
 * Research project status reporter (for producing periodic updates)
 
 
-# License
+## License
 
-Except where noted, <a rel="license" href="http://creativecommons.org/licenses/by/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by/4.0/80x15.png" /></a><br /><span xmlns:dct="http://purl.org/dc/terms/" href="http://purl.org/dc/dcmitype/Text" property="dct:title" rel="dct:type">Introduction to Relational Databases</span> by <span xmlns:cc="http://creativecommons.org/ns#" property="cc:attributionName">Mark Jordan</span> is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.
+<a rel="license" href="http://creativecommons.org/licenses/by/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by/4.0/80x15.png" /></a><br /><span xmlns:dct="http://purl.org/dc/terms/" href="http://purl.org/dc/dcmitype/Text" property="dct:title" rel="dct:type">Except where noted, Introduction to Relational Databases</span> by <span xmlns:cc="http://creativecommons.org/ns#" property="cc:attributionName">Mark Jordan</span> is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.
