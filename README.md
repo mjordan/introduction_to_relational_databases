@@ -34,13 +34,13 @@ For join tables, the primary key for each row is the unique _combination_ of the
 
 Putting together all of our tables, we get a database structure that can be represented like this:
 
-[@todo: label kyes as PK and FK]
-
 ![Books and editions](assets/BooksAuthorsEditions.jpg)
 
-Books, Authors, and Editions all have a unique ID (book_id, author_id, and edition_id respectively) that is used as their primary key, and Editions contains the foreign key book_id that links it to the Books table in a one-to-many relationship. The relation table BooksAuthors only has two columns, book_id and author_id, which are both foreign keys.
+Books, Authors, and Editions all have a unique ID (book_id, author_id, and edition_id respectively) that is used as their primary key (labelled as PK in the diagram above), and Editions contains the foreign key (FK) book_id that links it to the Books table in a one-to-many relationship. The join table BooksAuthors only has two columns, book_id and author_id, which are both foreign keys that make up a composite primary key (CPK).
 
-Here are the tables, structured as illustrated above, with some data in them:
+(This database portrays the relationships between books, authors, and editions in rather simplistic terms. For example, different manifestations of a book such as a paperback and an ebook usually have different ISBNs, and two different editions of a book can have different authors. However, the database will suffice as an example of a simple relational model.)
+
+Here are the tables, structured as illustrated above, with some data in them. Note that the order of the columns is not the same as in the diagrams:
 
 Books
 
@@ -200,7 +200,7 @@ In this workshop, we'll be interacting with our databases using a web-based mana
 
 ##### Command-line clients
 
-MySQL, PostgreSQL, and SQLite come with a command-line client. To invoke MySQL's client as the database's root user on Linux, you run the command `mysql -uroot -p`. After entering the root user's password, you would enter the MySQL shell, which looks like this:
+MySQL, PostgreSQL, and SQLite come with a command-line client. To invoke MySQL's client as the database's root user on Linux, you run the command `mysql -uroot -p`. After providing the root user's password, you enter the MySQL shell, which looks like this:
 
 ![MySQL command-line client](assets/mysql_client.png)
 
