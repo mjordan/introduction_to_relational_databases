@@ -28,7 +28,11 @@ One-to-many relationships also require that rows in tables have unique IDs, but 
 
 The IDs used to uniquely identify the things described in tables are called "primary keys". If the primary key of one table is used in another table, the key in the other table is called a "foreign key" in that table. For example, the "book_id" column in the Books table is that table's primary key, but the "book_id" column in the Editions table is a foreign key. The purpose of foreign keys is to link the two tables.
 
+For join tables, the primary key for each row is the unique _combination_ of the foreign keys from the two joined tables. In our example, the primary key of BooksAuthors is the combination of book_id and author_id.
+
 Putting together all of our tables, we get a database structure that can be represented like this:
+
+[@todo: label kyes as PK and FK]
 
 ![Books and editions](assets/BooksAuthorsEditions.jpg)
 
