@@ -38,7 +38,7 @@ Putting together all of our tables, we get a database structure that can be repr
 
 Books, Authors, and Editions all have a unique ID (book_id, author_id, and edition_id respectively) that is used as their primary key (labelled as PK in the diagram above), and Editions contains the foreign key (FK) book_id that links it to the Books table in a one-to-many relationship. The join table BooksAuthors only has two columns, book_id and author_id, which are both foreign keys that make up a composite primary key (CPK).
 
-(This database portrays the relationships between books, authors, and editions in rather simplistic terms. For example, different manifestations of a book such as a paperback and an ebook usually have different ISBNs, and two different editions of a book can have different authors. However, the database will suffice as an example of a simple relational model.)
+(This database portrays the relationships between books, authors, and editions in rather simplistic terms. For example, different manifestations of a book such as a paperback and an ebook usually have different ISBNs, and two different editions of a book can have different authors. Despite these issues, the database will suffice as an example of a simple relational model.)
 
 Here are the tables, structured as illustrated above, with some data in them. Note that the order of the columns is not the same as in the diagrams:
 
@@ -100,6 +100,24 @@ Editions
 |          9 |       3 |                2009 | 4              |
 +------------+---------+---------------------+----------------+
 ```
+
+### Data types and indexing
+
+Now that we have a structure for our database, and have seen some sample data, we can move on to querying the database. But first, it will be useful to learn about data types.
+
+As you can see from the sample data, some of the columns contain what look like simple numbers and some columns contain text. The Authors table illustrates this well: the author_id column contains incrementing digits while the last_name and first_name columns contain... names. RDBMSs require that when you create a table, you specify a "data type" for each column. There are a number of common data types, but the most common are:
+
+* integer (a negarive or positive number that does not have a fractional component)
+* varchar (which is short for "variable character data,"" or in other words, text)
+* text (text)
+
+Columns that are of varchar or text data types both contain text. The distinction between the two is mostly a matter of implementation and with the RDBMS. In this workshop we will use the text data type when creating tables. Even though we do not cover the distinctions between varchar and text, or introduce other data types, determining which data type a column should have is very important step in the design of a higly performant and optimized database. Choosing the wrong data type for a colum can have a dramatic impact on a database's speed, especially when the database contains tables with thousands or millions of rows.
+
+Defining indexes on columns is also a very important component in designing highly scalable databases, but we won't cover it in this workshop. Indexes allow the RDBMS to very quickly locate a particular row in a table without having to search every row. It is very common to define an index on a column if the table that the column is in is queried often. Primary and foreign keys are commonly indexed for this reason.
+
+One of the most common uses of the integer data type is to define "auto-increment" columns in a table. An important rule that you need to follow when choosing a data type for a column is that if you want the RDBMS to generate unique IDs for rows in a table, define the ID column in the table to be an auto-incrementing integer. If you do that, every new row added to the table will get a value in the ID column that is 1 higher than the value in that column for last created row. If you look at the Books, Authors, and Editions tables above, you will see the ascending values in the ID columns. The order of the IDs reflects the order in which the rows were added to the tables.
+
+A corollary to this rule is that the data type for columns that are foreign keys should be the same as the data type for the primary key they link to. If primary keys are of type integer, then foreign keys should be as well.
 
 ### Querying tables using SQL
 
