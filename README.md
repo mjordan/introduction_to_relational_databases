@@ -26,7 +26,7 @@ This intermediate table (in this example, BooksAuthors) is known as a "relation"
 
 One-to-many relationships also require that rows in tables have unique IDs, but unlike in the join table used in many-to-many relationship, the table that contains the data describing the "many" side of the relationship has a column reserved for the ID of the "one" side of the relationship. 
 
-The IDs used to uniquely identify the things described in tables are called "primary keys". If these IDs are used in other tables, they are called "foreign keys" in those tables. For example, the "book_id" column in the Books table is that table's primary key, but the "book_id" column in the Editions table is a foreign key.
+The IDs used to uniquely identify the things described in tables are called "primary keys". If the primary key of one table is used in another table, the key in the other table is called a "foreign key" in that table. For example, the "book_id" column in the Books table is that table's primary key, but the "book_id" column in the Editions table is a foreign key. The purpose of foreign keys is to link the two tables.
 
 Putting together all of our tables, we get a database structure that can be represented like this:
 
@@ -122,7 +122,7 @@ which produces the following:
 
 ```
 
-Using uppercase for SQL commands is a convention only, it's not mandatory. Also, the output we're seeing here is specific to the MySQL command-line client, which we're not using in this workshop. How you query the databaase, and how the results output will look will depend on what tool is being used to manage the database.
+Using uppercase for SQL commands is a convention only, it's not mandatory. Also, the output we're seeing here is specific to the MySQL command-line client, which we're not using in this workshop but which we will see illustrated below. How you query the databaase, and how the results output will look will depend on what tool you are using to manage the database.
 
 This query asks for the first and last names of authors of the book with book_id 1:
 
