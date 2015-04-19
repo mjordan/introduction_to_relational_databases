@@ -202,7 +202,7 @@ You then issue SQL and MySQL-specific commands within the MySQL shell, like this
 
 ![MySQL command-line client](assets/mysql_client_query.png)
 
-Other command-line clients exist for specific purposes. For example, a database developer or administrator would use the `mysqldump` command to produce a "dump" of a MySQL database for backup purposes or for moving to a different server. The dump contains all the SQL commands required to recreate the database. For example, this is dump of the Books database that we saw earlier in the workshop:
+Other command-line clients exist for specific purposes. For example, a database developer or administrator would use the `mysqldump` command to produce a "dump" of a MySQL database for backup purposes or for moving to a different server. The dump contains all the SQL commands (and data, if there is any) required to recreate the database. For example, this is a dump of the Books database we saw earlier in the workshop:
 
 ```sql
 -- MySQL dump 10.13  Distrib 5.5.41, for debian-linux-gnu (i686)
@@ -543,7 +543,7 @@ Wordpress is a popular blogging and Content Management System that powers a [ver
 
 This diagram shows us that rows in the wp_posts table are on the "one" side of a one-to-many relationship with rows in three "many" tables, and is on the "many" side of a relationship with the wp_users table.
 
-Also of note is the use of several lookup tables (wp_usermeta, wp_commentmeta, and wp_postmeta) that use "[key-value](http://en.wikipedia.org/wiki/Attribute-value_pair)" pattern to define rows. Tables that use this pattern define a column for keys and a column for values. In each row, the key is the name of an attribute and the value is the content of the attribute. Using this structure, the table can store date whose key or name is not known when the table was designed and created. Tables that use key-value structure are very flexible, but SQL queries used to manage them and select data from them are more complicated than ones that use predictable column names.
+Also of note is the use of several lookup tables (wp_usermeta, wp_commentmeta, and wp_postmeta) that use the  "[key-value](http://en.wikipedia.org/wiki/Attribute-value_pair)" pattern to define rows. Tables that use this pattern define a single column for keys and a single column for values. In each row, the key is the name of an attribute and the value is the content of the attribute. Using this structure, the table can store date whose key or name is not known when the table was designed and created. Tables that use key-value structure are very flexible, but SQL queries used to manage them and select data from them are more complicated than ones that use predictable column names.
 
 ### Firefox
 
@@ -580,7 +580,7 @@ Relational databases are remarkably flexible and powerful, but they are not the 
 * Fulltext indexing engines
   * Fulltext indexing engines focus on efficient queries over large amounts of strucutured or unstructured text, something relational databases have never been really good at. Two of the most popular fulltext search engines are [Solr](http://lucene.apache.org/solr/) and [Elasticsearch](https://www.elastic.co/products/elasticsearch).
 
-Relational databases can exist and work with any of these technologies in the same application. For example, the general repository platform [Islandora](http://islandora.ca/) uses a relational database (to power its Drupal website), a triplestore (to store and query relationship information such as which pages are in a specific book), and the Solr fulltext indexing engine (for end-user queries against the content of collections and individual objects).
+Relational databases can exist and work with any of these technologies in the same application. For example, the  repository platform [Islandora](http://islandora.ca/) uses a relational database (to power its Drupal website), a triplestore (to store and query relationship information such as which pages are in a specific book, which is a parent-child relationship), and the Solr fulltext indexing engine (for end-user queries against the content of collections and individual objects).
 
 
 ## Exercise: Data modeling for relational databases
