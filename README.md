@@ -30,6 +30,8 @@ One-to-many relationships also require that rows in tables have unique IDs, but 
 
 The IDs used to uniquely identify the things described in tables are called "primary keys". If the primary key of one table is used in another table, the key in the other table is called a "foreign key" in that table. For example, the "book_id" column in the Books table is that table's primary key, but the "book_id" column in the Editions table is a foreign key. The purpose of foreign keys is to link the two tables.
 
+You may be wondering why we didn't use ISBN for the unique ID for each row in the books table. We could have done that, but there is a problem with ISBNs: it is easy for a human operator to make an error while entering them. Since primary keys need to be unique, we don't want to use something as the primary key that we can't trust to be unique. If we used ISBNs as primary keys, and we encountered one that was the same as one that was already in our database, the database would not save the row since it enforces the uniqueness of the primary key. If your rows have attributes that you can be absolutley sure will be unique, you can use that attribute as a primary key, but it's usually safer to let the RDBMS assign an auto-incremented integer as the primary key.
+
 For join tables, the primary key for each row is the unique _combination_ of the foreign keys from the two joined tables. In our example, the primary key of BooksAuthors is the combination of book_id and author_id. A primary key that is comprised of more than one attribute is called a "composite key."
 
 Putting together all of our tables, we get a database structure that can be represented like this:
@@ -112,7 +114,7 @@ As you can see from the sample data, some of the columns contain what look like 
 * text (text)
 * boolean (either true or false; represented in some systems as 1 or 0, respectively)
 
-Columns that are of varchar or text data types both contain text. The distinction between the two is mostly a matter of implementation and with the RDBMS. In this workshop we will use the text data type when creating tables. Even though we do not cover the distinctions between varchar and text, or introduce other data types, determining which data type a column should have is very important step in designing higly performant and optimized databases. Choosing the wrong data type for a column can have a dramatic impact on a database's speed, especially when the database has tables containing thousands or millions of rows.
+Columns that are of varchar or text data types both contain text. The distinction between the two is mostly a matter of implementation and with the RDBMS. In this workshop we will use the text data type when creating tables. Even though we do not cover the distinctions between varchar and text, or introduce other data types, determining which data type a column should have is very important step in designing higly performant and optimized databases. Choosing the wrong data type for a column can have a dramatic impact on a database's speed and the amount of disk space it consumes, especially when the database has tables containing thousands or millions of rows.
 
 One of the most common uses of the integer data type is to define "auto-increment" columns in a table. An important rule that you need to follow when choosing a data type for a column is that if you want the RDBMS to generate unique IDs for rows in a table, define the ID column in the table to be an auto-incrementing integer. If you do that, every new row added to the table will get a value in the ID column that is 1 higher than the value in that column for most recently created row. If you look at the Books, Authors, and Editions tables above, you will see the ascending values in the ID columns. The order of the IDs reflects the order in which the rows were added to the tables.
 
@@ -548,6 +550,8 @@ INSERT INTO `shapes` (`name`, `number_straight_sides`, `example_picture_url`, `r
 VALUES ('square', '4', 'http://www.mlahanas.de/Greeks/images/sq1.jpg', 'Window');
 ```
 
+Now, you add other shapes to your database.
+
 ### Modifying data
 
 ```sql
@@ -556,6 +560,17 @@ UPDATE `shapes` SET
 WHERE `shape_id` = '1';
 ```
 
+Now, perform a query on the two shapes you added that will change the value of their real_world_example fields.
+
+### Selecting data
+
+```sql
+SELECT name FROM shapes WHERE number_straight_sides > 3;
+
+```
+
+Now, change the number of sides in your SELECT query and run the query again.
+
 ### Deleting data
 
 ```sql
@@ -563,15 +578,13 @@ DELETE FROM `shapes`
 WHERE `shape_id` = '1';
 ```
 
-### Selecting data
-
-
+Now, delete the rows for the two shapes that you added.
 
 ## Exercise: Selecting data from the Class Scheduling database
 
 In this exercise, we will use some existing SELECT queries on the Classes database we modelled earlier in the workshop as the basis for creating our own. Your instructor will provide the URL of the tool you will use, plus login credentials for the tool.
 
-Query 1. Find all the rows in the classes table for the course with ID 1. Sort by date of the class.
+Query 1: find all the rows in the classes table for the course with ID 1. Sort by date of the class.
 
 ```sql
 SELECT * FROM classes WHERE course_id = 1 ORDER BY date;
@@ -579,7 +592,7 @@ SELECT * FROM classes WHERE course_id = 1 ORDER BY date;
 
 Modify this query so that it uses course number, and not ID.
 
-Query 2. Find the titles of courses taught by Stanislaw Novak.
+Query 2: find the titles of courses taught by Stanislaw Novak.
 
 ```sql
 SELECT courses.title from courses, instructors, courses_instructors
@@ -590,7 +603,7 @@ AND instructors.instructor_id = courses_instructors.instructor_id
 
 Modify this query so that it selects not just course title, but also course number and department.
 
-Query 3. Find all courses that only have one instructor.
+Query 3: find all courses that only have one instructor.
 
 ```sql
 SELECT courses_instructors.course_id, COUNT(courses_instructors.course_id) AS c
@@ -600,7 +613,7 @@ GROUP BY course_id HAVING(c) = 1
 
 Modify this query so that it uses a different alias for the count of course IDs. Note: Do not use the word 'count' as the alias.
 
-Query 4. Find all instructors whose classes start at 9:00 a.m.
+Query 4: find all instructors whose classes start at 9:00 a.m.
 
 ```SQL
 SELECT DISTINCT instructors.last_name, instructors.first_name
