@@ -386,7 +386,7 @@ This is a screenshot from [PHPMyAdmin](http://www.phpmyadmin.net/home_page/index
 ![MySQL Workbench schema view](assets/mysqlworkbench_schema.png)
 MySQL Workbench schema view
 
-![MySQL Workbench ER diagram view](assets/Books_MySQLWorkbench_EER_Diagram.png)
+![MySQL Workbench ER diagram view](assets/mysqlworkbench_er_diagram.png)
 MySQL Workbench ER diagram view
 
 ##### Limitations of RDBMS managemant applications
