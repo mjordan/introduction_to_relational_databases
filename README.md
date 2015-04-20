@@ -682,12 +682,13 @@ Now, delete the rows for the two shapes that you added.
 
 ## Exercise: Selecting data from the Class Scheduling database
 
-In this exercise, we will modify the SELECT queries used to test the Classes database we modelled earlier in the workshop.
+In this exercise, we will modify the SELECT queries used to test the ClassSchedules database we modelled earlier in the workshop.
 
 ### Query 1: find all the rows in the classes table for the course with ID 1. Sort by date of the class.
 
 ```sql
-SELECT * FROM classes WHERE course_id = 1 ORDER BY date;
+SELECT * FROM classes WHERE course_id = 1
+ORDER BY date;
 ```
 
 Modify this query so that it uses course number, and not ID.
