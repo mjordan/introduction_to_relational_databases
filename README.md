@@ -499,7 +499,7 @@ If the course_instructors contained a "highest_degree" column, the table would n
 
 #### Third Normal Form (3NF)
 
-Like the Second Normal Form but applies tables that don't use a composite primary key. No non-key column must be dependent on another non-key column. In other words, every non-key column must be completely independent of each other non-key column. Evaluating our rooms table, we need to decide if the value of "has_projector" depends on the value of the "type" column. If it does (e.g. only ..... [@todo: come up with a better example]
+The Third Normal Form requires that every non-key column must state a fact about the row's key and only about the row's key. In other words, every non-key column must be completely independent of each other non-key column. All of our tables pass this test: all of the non-key columns state a piece of data that describes the thing identified in the primary key column irrespective of the values of the other non-primary key columns in the row.
 
 #### Fourth and Fifth Normal Forms
 
