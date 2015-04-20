@@ -110,12 +110,15 @@ As you can see from the sample data, some of the columns contain what look like 
 * integer (a negarive or positive number that does not have a fractional component)
 * varchar (which is short for "variable character data," or in other words, text)
 * text (text)
+* boolean (either true or false; represented in some systems as 1 or 0, respectively)
 
 Columns that are of varchar or text data types both contain text. The distinction between the two is mostly a matter of implementation and with the RDBMS. In this workshop we will use the text data type when creating tables. Even though we do not cover the distinctions between varchar and text, or introduce other data types, determining which data type a column should have is very important step in designing higly performant and optimized databases. Choosing the wrong data type for a column can have a dramatic impact on a database's speed, especially when the database has tables containing thousands or millions of rows.
 
 One of the most common uses of the integer data type is to define "auto-increment" columns in a table. An important rule that you need to follow when choosing a data type for a column is that if you want the RDBMS to generate unique IDs for rows in a table, define the ID column in the table to be an auto-incrementing integer. If you do that, every new row added to the table will get a value in the ID column that is 1 higher than the value in that column for most recently created row. If you look at the Books, Authors, and Editions tables above, you will see the ascending values in the ID columns. The order of the IDs reflects the order in which the rows were added to the tables.
 
 A corollary to this rule is that the data type for columns that are foreign keys should be the same as the data type for the primary key they link to. Therefore, if primary keys are of type integer, then foreign keys should be as well.
+
+Columns of type boolean have two possible values, true or false. Most RDBMSs represent true and false as the integers 1 and 0, respectively.
 
 Defining indexes on columns is also a very important component in designing highly scalable databases, but we won't cover it in this workshop. Indexes allow the RDBMS to very quickly locate a particular row in a table without having to search every row. It is very common to define an index on a column if the table that the column is in is queried often. Primary and foreign keys are commonly indexed for this reason.
 
@@ -305,7 +308,11 @@ DROP TABLE IF EXISTS `BooksAuthors`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `BooksAuthors` (
   `book_id` int(11) NOT NULL,
-  `author_id` int(11) NOT NULL
+  `author_id` int(11) NOT NULL,
+  KEY `book_id` (`book_id`),
+  KEY `author_id` (`author_id`),
+  CONSTRAINT `BooksAuthors_ibfk_2` FOREIGN KEY (`author_id`) REFERENCES `Authors` (`author_id`),
+  CONSTRAINT `BooksAuthors_ibfk_1` FOREIGN KEY (`book_id`) REFERENCES `Books` (`book_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -331,7 +338,9 @@ CREATE TABLE `Editions` (
   `book_id` int(11) NOT NULL,
   `date_of_publication` year(4) NOT NULL,
   `edition_number` text COLLATE utf8_unicode_ci NOT NULL,
-  PRIMARY KEY (`edition_id`)
+  PRIMARY KEY (`edition_id`),
+  KEY `book_id` (`book_id`),
+  CONSTRAINT `Editions_ibfk_1` FOREIGN KEY (`book_id`) REFERENCES `Books` (`book_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -354,7 +363,8 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2015-04-18  9:06:22
+-- Dump completed on 2015-04-20  8:32:01
+
 ```
 
 ##### Web-based RDBMS management applications
@@ -376,7 +386,7 @@ This is a screenshot from [PHPMyAdmin](http://www.phpmyadmin.net/home_page/index
 ![MySQL Workbench schema view](assets/mysqlworkbench_schema.png)
 MySQL Workbench schema view
 
-![MySQL Workbench ER diagram view](assets/mysqlworkbench_er_diagram.png)
+![MySQL Workbench ER diagram view](assets/Books_MySQLWorkbench_EER_Diagram.png)
 MySQL Workbench ER diagram view
 
 ##### Limitations of RDBMS managemant applications
@@ -402,7 +412,7 @@ If you are adding a row to this table, you need to know which book ID to use to 
 
 In the exercises using SQL below, we'll need to work around this limitation of the tool we are using by opening multiple web browser windows so we can see all the tables we are using in our queries. Your instructor will demonstrate this work around in person.
 
-One web-based RDBMS management tool that does not have this limitation is [Xataface](http://xataface.com/). The screen shot below was taken from a database that uses Xataface. (The database, coincidentally, also describes books, specifcally, a set of books published in the late 1700s up to the end of the 1800s associated with a particular region in England.) The "Places" form depicted here exists within the form used to edit book entries. The database contains a "books" table, a "publication_place" table, and a more general "place" table. The example below shows how the user can choose a value from either of those tables directly within the form used to edit the book that the places are associated with:
+One web-based RDBMS management tool that does not have this limitation is [Xataface](http://xataface.com/). The screen shot below was taken from a database that uses Xataface. (The database, coincidentally, also describes books, specifcally, a set of books published from the late 1700s up to the end of the 1900s associated with a particular region in England.) The "Places" form depicted here exists within the form used to edit book entries. The database contains a "books" table, a "publication_place" table, and a more general "place" table. The example below shows how the user can choose a value from either of those tables directly within the form used to edit the book that the places are associated with:
 
 ![Example of an autocomplete field for selecting values from linked tables](assets/xataface_linked_table_example.png)
 Image courtesy of John Dingle and Margaret Linley.

@@ -74,7 +74,11 @@ DROP TABLE IF EXISTS `BooksAuthors`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `BooksAuthors` (
   `book_id` int(11) NOT NULL,
-  `author_id` int(11) NOT NULL
+  `author_id` int(11) NOT NULL,
+  KEY `book_id` (`book_id`),
+  KEY `author_id` (`author_id`),
+  CONSTRAINT `BooksAuthors_ibfk_2` FOREIGN KEY (`author_id`) REFERENCES `Authors` (`author_id`),
+  CONSTRAINT `BooksAuthors_ibfk_1` FOREIGN KEY (`book_id`) REFERENCES `Books` (`book_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -100,7 +104,9 @@ CREATE TABLE `Editions` (
   `book_id` int(11) NOT NULL,
   `date_of_publication` year(4) NOT NULL,
   `edition_number` text COLLATE utf8_unicode_ci NOT NULL,
-  PRIMARY KEY (`edition_id`)
+  PRIMARY KEY (`edition_id`),
+  KEY `book_id` (`book_id`),
+  CONSTRAINT `Editions_ibfk_1` FOREIGN KEY (`book_id`) REFERENCES `Books` (`book_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -123,4 +129,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2015-04-18  9:06:22
+-- Dump completed on 2015-04-20  8:32:01
