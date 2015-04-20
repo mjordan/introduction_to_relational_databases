@@ -30,7 +30,7 @@ One-to-many relationships also require that rows in tables have unique IDs, but 
 
 The IDs used to uniquely identify the things described in tables are called "primary keys". If the primary key of one table is used in another table, the key in the other table is called a "foreign key" in that table. For example, the "book_id" column in the Books table is that table's primary key, but the "book_id" column in the Editions table is a foreign key. The purpose of foreign keys is to link the two tables.
 
-You may be wondering why we didn't use ISBN for the unique ID for each row in the books table. We could have done that, but there is a problem with ISBNs: it is easy for a human operator to make an error while entering them. Since primary keys need to be unique, we don't want to use something as the primary key that we can't trust to be unique. If we used ISBNs as primary keys, and we encountered one that was the same as one that was already in our database, the database would not save the row since it enforces the uniqueness of the primary key. If your rows have attributes that you can be absolutley sure will be unique, you can use that attribute as a primary key, but it's usually safer to let the RDBMS assign an auto-incremented integer as the primary key.
+You may be wondering why we didn't use ISBN for the unique ID for each row in the Books table. We could have done that, but there is a problem with ISBNs: it is easy for a human operator to make an error while entering them. Since primary keys need to be unique, we don't want to use something as the primary key that we can't trust to be unique. If we used ISBNs as primary keys, and we encountered one that was the same as an ISBN that was already in our database, the database would not save the row. If your rows have attributes that you can be absolutley sure will be unique, you can use that attribute as a primary key, but it's usually safer, and a common convention, to let the RDBMS assign an auto-incremented integer as the primary key.
 
 For join tables, the primary key for each row is the unique _combination_ of the foreign keys from the two joined tables. In our example, the primary key of BooksAuthors is the combination of book_id and author_id. A primary key that is comprised of more than one attribute is called a "composite key."
 
@@ -40,7 +40,7 @@ Putting together all of our tables, we get a database structure that can be repr
 
 Books, Authors, and Editions all have a unique ID (book_id, author_id, and edition_id respectively) that is used as their primary key (labelled as PK in the diagram above), and Editions contains the foreign key (FK) book_id that links it to the Books table in a one-to-many relationship. The join table BooksAuthors only has two columns, book_id and author_id, which are both foreign keys that make up a composite primary key (CPK).
 
-(This database portrays the relationships between books, authors, and editions in rather simplistic terms. For example, different manifestations of a book such as a paperback and an ebook usually have different ISBNs, and two different editions of a book can have different authors. Despite these issues, the database will suffice as an example of a simple relational model.)
+(It should be noted that this database portrays the relationships between books, authors, and editions in rather simplistic terms. For example, different manifestations of a book such as a paperback and an ebook usually have different ISBNs, and two different editions of a book can have different authors. Despite these issues, the database will suffice as an example of a simple relational model.)
 
 Here are the tables, structured as illustrated above, with some data in them. Note that the order of the columns is not the same as in the diagrams:
 
@@ -198,6 +198,8 @@ which returns the folowing results:
 3 rows in set (0.00 sec)
 ```
 You'll notice repetition in the book_id, title, and ISBN columns in the results. Those columns are the ones we're asking for in the query, so the response is correct, since we're also asking for the date of publication from the Editions table, which in our results contains the correct values.
+
+You'll also notice that in this last query, we referred to Books.book_id and Editions.book_id. Since the column book_id exists in more than one table, we need to disambiguate which book_id column we mean. RDBMSs let us refer columns in specific tables this way (in fact, they require it in situations where the column name is ambiguous).
 
 ### Relational database management systems
 
@@ -679,11 +681,11 @@ As a general rule, if your data is alreay in XML or JSON , or if you are dealing
 
 ## Exercise: Data modeling for relational databases
 
-Sample topics:
+Below are some sample topics that we can use to practive ER modeling. Pick a topic, and define the scope of the database you are creating in a single sentence (like "...to create a database that we can use to schedule classes in a set of academic courses" used in the example above). Then, start by listing all of the entities you will need in your database and move on to adding their attributes. After that, draw (on paper or using a piece of software) some ER diagrams showing how the entities relate to each other, noting the primary keys and foreign keys, and join tables if necessary.
+
 * Database that tracks which articles cite which other articles
 * Personal music, book (or other) collection
 * Research project status reporter (for producing periodic updates)
-
 
 ## License
 
