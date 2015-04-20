@@ -543,6 +543,8 @@ This is what you should see in Adminer:
 
 ![Creating a table in Adminer](assets/using_sql_exercise_creating_table.png)
 
+For this exercise, we're going to add this table to the ClassSchedules database in Adminer. True, the Shapes table is not related in any way to the content of the ClassSchedules database. It doesn't have to be. Relational databases are just containers for tables, and apart from constraint you as the database designer put on the relationships between tables, RDBMSs don't impose or enforce any additional constraints. In this exercise, we'll add the Shapes table to the ClassSchedules database simply because that database already exists and you have access to it.
+
 ### Inserting data
 
 We'll use raw SQL to add (INSERT) a row into the table. Click on the "SQL command" link on the left-hand side of the Adminer interface and enter this:
