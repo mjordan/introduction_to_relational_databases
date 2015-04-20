@@ -569,15 +569,17 @@ WHERE `shape_id` = '1';
 
 ## Exercise: Selecting data from the Class Scheduling database
 
-In this exercise, we will perform some SELECT queries on the Classes database we modelled earlier in the workshop. Your instructor will provide the URL of the tool you will use, plus login credentials for the tool.
+In this exercise, we will use some existing SELECT queries on the Classes database we modelled earlier in the workshop as the basis for creating our own. Your instructor will provide the URL of the tool you will use, plus login credentials for the tool.
 
-1. Find all the rows in the classes table for the course with ID 1. Sort by date of the class.
+Query 1. Find all the rows in the classes table for the course with ID 1. Sort by date of the class.
 
 ```sql
 SELECT * FROM classes WHERE course_id = 1 ORDER BY date;
 ```
 
-2. Find the titles of courses taught by Stanislaw Novak.
+Modify this query so that it uses course number, and not ID.
+
+Query 2. Find the titles of courses taught by Stanislaw Novak.
 
 ```sql
 SELECT courses.title from courses, instructors, courses_instructors
@@ -586,7 +588,9 @@ AND courses.course_id = courses_instructors.course_id
 AND instructors.instructor_id = courses_instructors.instructor_id
 ```
 
-3. Find all courses that only have one instructor.
+Modify this query so that it selects not just course title, but also course number and department.
+
+Query 3. Find all courses that only have one instructor.
 
 ```sql
 SELECT courses_instructors.course_id, COUNT(courses_instructors.course_id) AS c
@@ -594,15 +598,20 @@ FROM courses_instructors
 GROUP BY course_id HAVING(c) = 1
 ```
 
-4. Find all instructors whose classes start at 9:00 a.m.
+Modify this query so that it uses a different alias for the count of course IDs. Note: Do not use the word 'count' as the alias.
+
+Query 4. Find all instructors whose classes start at 9:00 a.m.
 
 ```SQL
-SELECT DISTINCT instructors.last_name, instructors.first_name from instructors, classes, courses, courses_instructors
+SELECT DISTINCT instructors.last_name, instructors.first_name
+FROM instructors, classes, courses, courses_instructors
 WHERE instructors.instructor_id = courses_instructors.instructor_id
 AND courses.course_id = courses_instructors.course_id
 AND classes.course_id = courses_instructors.course_id
 AND classes.time = '09:00:00'
 ```
+
+Modify this query so that it only selects instructors who teach in the room with ID 3.
 
 ## Integrating relational databases into applications
 
