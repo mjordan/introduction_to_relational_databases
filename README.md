@@ -507,14 +507,16 @@ Don't worry about these.
 
 ### Testing databases
 
-Once you have applied the normalization tests to your tables, you need to test the database to make sure that it supports the kinds of SQL queries that you expect to make against it. The following SELECT queries confirm that 
+Once you have applied the normalization tests to your tables, you need to test the database to make sure that it supports the kinds of SQL queries that you expect to make against it. Once you have populated your database with a small set of rows for each table, perform some SQL queries whose results you can verify by inspecting the relevant tables.
 
 Test 1: Find all the rows in the classes table for the course with ID 1, sorted by date of the class.
 
 ```sql
-SELECT * FROM classes WHERE course_id = 1 ORDER BY date;
+SELECT * FROM classes
+WHERE course_id = 1
+ORDER BY date;
 ```
-Produces the following expected results:
+This SQL query produces the following expected results:
 
 ```
 mysql> SELECT * FROM classes WHERE course_id = 1 ORDER BY date;
@@ -540,7 +542,7 @@ Test 2: Find the titles of courses taught by Stanislaw Novak.
 SELECT courses.title from courses, instructors, courses_instructors
 WHERE instructors.last_name = 'Novak'
 AND courses.course_id = courses_instructors.course_id
-AND instructors.instructor_id = courses_instructors.instructor_id
+AND instructors.instructor_id = courses_instructors.instructor_id;
 ```
 
 produces the following expected results:
@@ -555,12 +557,12 @@ produces the following expected results:
 2 rows in set (0.00 sec)
 ```
 
-Test 3: Find all courses that only have one instructor. To perform this query, we will need to use GROUP BY and COUNT, which are known as "aggregate functions" in SQL:
+Test 3: Find all courses that only have one instructor. To perform this query, we will need to use GROUP BY and COUNT, which are known as "[aggregate functions](http://en.wikipedia.org/wiki/Aggregate_function" in SQL. Notice we also define an alias ('c') for COUNT(courses_instructors.course_id), which makes it easier to later in the query:
 
 ```sql
 SELECT courses_instructors.course_id, COUNT(courses_instructors.course_id) AS c
 FROM courses_instructors
-GROUP BY course_id HAVING(c) = 1
+GROUP BY course_id HAVING(c) = 1;
 ```
 
 produces the following expected results:
@@ -584,7 +586,7 @@ FROM instructors, classes, courses, courses_instructors
 WHERE instructors.instructor_id = courses_instructors.instructor_id
 AND courses.course_id = courses_instructors.course_id
 AND classes.course_id = courses_instructors.course_id
-AND classes.time = '09:00:00'
+AND classes.time = '09:00:00';
 ```
 
 produces the expected results:
