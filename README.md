@@ -557,7 +557,7 @@ produces the following expected results:
 2 rows in set (0.00 sec)
 ```
 
-Test 3: Find all courses that only have one instructor. To perform this query, we will need to use GROUP BY and COUNT, which are known as "[aggregate functions](http://en.wikipedia.org/wiki/Aggregate_function" in SQL. Notice we also define an alias ('c') for COUNT(courses_instructors.course_id), which makes it easier to later in the query:
+Test 3: Find all courses that only have one instructor. To perform this query, we will need to use GROUP BY and COUNT, which are known as "[aggregate functions](http://en.wikipedia.org/wiki/Aggregate_function)" in SQL. Notice we also define an alias ('c') for the awkward "COUNT(courses_instructors.course_id)", which makes it easier to later in the query:
 
 ```sql
 SELECT courses_instructors.course_id, COUNT(courses_instructors.course_id) AS c
@@ -600,6 +600,8 @@ produces the expected results:
 +-----------+------------+
 2 rows in set (0.00 sec)
 ```
+
+If we can query our database and get back expected results, its tables are probably structured well enough to move into production. If out test queries return any unexpected results, we need to re-evaluate our entities (and their attributes) and how the tables we have constructed are linked together.
 
 ## Exercise: Using SQL
 
