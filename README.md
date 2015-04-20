@@ -431,7 +431,7 @@ We will begin by listing all of the things we need to include in our database:
 * Courses
 * Rooms
 
-If we put some thought into this short list of entities, and add to each one the likely attributes that we'll need to include, we come up with a more detailed list, plus some example values for the attributes and some questions we need to flesh out more fully later on:
+If we put some thought into this short list of entities, and add to each one the likely attributes that we'll need to include, we come up with a more detailed list, plus some example values for the attributes and some questions we need to flesh out more fully later on. You will notice that this more detailed list adds "instructors" as a top-level entity. No specific methodology resulted in this addition, the person doing the modeling simply decided that, given the goal of this database, it would be useful to include instructors as an entity since they are so tightly associated with courses, and that it is likely that the person teaching the course may need to be notified in the event that a problem arose with the room where a class is being held. Database modeling is as much as an art as it is a science. Our expanded list looks like this:
 
 * Classes
   * Date
@@ -464,8 +464,9 @@ Using the modifications made to our rough ER diagram, the modeller then updated 
 
 ![Revised ER diagram](assets/classes_modeling_example_revised_erd.jpg)
 
-
 ### Normalization
+
+Normalization is the process of applying a set of standardized tests to tables in a relational database. These tests are known as the "normal forms", which are numbered the First, Second, and Third Normal Forms. There are additional normal forms but the Third is the highest that most databases should pass.
 
 #### First Normal Form (1NF)
 
