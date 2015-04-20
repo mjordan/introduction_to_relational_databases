@@ -507,8 +507,97 @@ Don't worry about these.
 
 ### Testing databases
 
-[@todo: add some sample data, do some SQL queries.]
+Once you have applied the normalization tests to your tables, you need to test the database to make sure that it supports the kinds of SQL queries that you expect to make against it. The following SELECT queries confirm that 
 
+Test 1: Find all the rows in the classes table for the course with ID 1, sorted by date of the class.
+
+```sql
+SELECT * FROM classes WHERE course_id = 1 ORDER BY date;
+```
+Produces the following expected results:
+
+```
+mysql> SELECT * FROM classes WHERE course_id = 1 ORDER BY date;
++----------+-----------+---------+------------+----------+
+| class_id | course_id | room_id | date       | time     |
++----------+-----------+---------+------------+----------+
+|        8 |         1 |       1 | 2015-04-07 | 13:00:00 |
+|       28 |         1 |       1 | 2015-04-09 | 13:00:00 |
+|        9 |         1 |       1 | 2015-04-14 | 13:00:00 |
+|       29 |         1 |       1 | 2015-04-16 | 13:00:00 |
+|       10 |         1 |       1 | 2015-04-21 | 13:00:00 |
+|       30 |         1 |       1 | 2015-04-23 | 13:00:00 |
+|       11 |         1 |       1 | 2015-04-28 | 13:00:00 |
+|       31 |         1 |       1 | 2015-04-30 | 13:00:00 |
++----------+-----------+---------+------------+----------+
+8 rows in set (0.01 sec)
+```
+
+
+Test 2: Find the titles of courses taught by Stanislaw Novak.
+
+```sql
+SELECT courses.title from courses, instructors, courses_instructors
+WHERE instructors.last_name = 'Novak'
+AND courses.course_id = courses_instructors.course_id
+AND instructors.instructor_id = courses_instructors.instructor_id
+```
+
+produces the following expected results:
+
+```
++---------------------------------------------------+
+| title                                             |
++---------------------------------------------------+
+| Creating Digital Texts using TEI                  |
+| Introduction to Digital Humanities for Historians |
++---------------------------------------------------+
+2 rows in set (0.00 sec)
+```
+
+Test 3: Find all courses that only have one instructor. To perform this query, we will need to use GROUP BY and COUNT, which are known as "aggregate functions" in SQL:
+
+```sql
+SELECT courses_instructors.course_id, COUNT(courses_instructors.course_id) AS c
+FROM courses_instructors
+GROUP BY course_id HAVING(c) = 1
+```
+
+produces the following expected results:
+
+```
++-----------+---+
+| course_id | c |
++-----------+---+
+|         2 | 1 |
+|         4 | 1 |
++-----------+---+
+2 rows in set (0.00 sec)
+```
+
+
+Test 4: Find all instructors whose classes start at 9:00 a.m.
+
+```SQL
+SELECT DISTINCT instructors.last_name, instructors.first_name
+FROM instructors, classes, courses, courses_instructors
+WHERE instructors.instructor_id = courses_instructors.instructor_id
+AND courses.course_id = courses_instructors.course_id
+AND classes.course_id = courses_instructors.course_id
+AND classes.time = '09:00:00'
+```
+
+produces the expected results:
+
+```
++-----------+------------+
+| last_name | first_name |
++-----------+------------+
+| Turay     | Tandice    |
+| Roy       | Shanta     |
++-----------+------------+
+2 rows in set (0.00 sec)
+```
 
 ## Exercise: Using SQL
 
@@ -589,9 +678,9 @@ Now, delete the rows for the two shapes that you added.
 
 ## Exercise: Selecting data from the Class Scheduling database
 
-In this exercise, we will use some existing SELECT queries on the Classes database we modelled earlier in the workshop as the basis for creating our own. Your instructor will provide the URL of the tool you will use, plus login credentials for the tool.
+In this exercise, we will modify the SELECT queries used to test the Classes database we modelled earlier in the workshop.
 
-Query 1: find all the rows in the classes table for the course with ID 1. Sort by date of the class.
+### Query 1: find all the rows in the classes table for the course with ID 1. Sort by date of the class.
 
 ```sql
 SELECT * FROM classes WHERE course_id = 1 ORDER BY date;
@@ -599,7 +688,7 @@ SELECT * FROM classes WHERE course_id = 1 ORDER BY date;
 
 Modify this query so that it uses course number, and not ID.
 
-Query 2: find the titles of courses taught by Stanislaw Novak.
+### Query 2: find the titles of courses taught by Stanislaw Novak.
 
 ```sql
 SELECT courses.title from courses, instructors, courses_instructors
@@ -610,7 +699,7 @@ AND instructors.instructor_id = courses_instructors.instructor_id
 
 Modify this query so that it selects not just course title, but also course number and department.
 
-Query 3: find all courses that only have one instructor.
+### Query 3: find all courses that only have one instructor.
 
 ```sql
 SELECT courses_instructors.course_id, COUNT(courses_instructors.course_id) AS c
@@ -620,7 +709,7 @@ GROUP BY course_id HAVING(c) = 1
 
 Modify this query so that it uses a different alias for the count of course IDs. Note: Do not use the word 'count' as the alias.
 
-Query 4: find all instructors whose classes start at 9:00 a.m.
+### Query 4: find all instructors whose classes start at 9:00 a.m.
 
 ```SQL
 SELECT DISTINCT instructors.last_name, instructors.first_name
