@@ -602,7 +602,7 @@ Many web application frameworks provide tools to generate web forms for creating
 Relational databases are remarkably flexible and powerful, but they are not the best tool for every job. Other types of databases that you will hear of include:
 
 * NoSQL databases
-  * "NoSLQ" is an acronym for "Not only SQL." These databases store non-tabular data. Examples include [CouchDB](http://couchdb.apache.org/), [MongoDB](https://www.mongodb.org/). Typical applications for NoSQL databases include serving large-scale structured data or as complements to relational database applications. As a class of products, NoSQL databases have no standardized query language - each product uses its own language for adding, modifying, and retrieving data.
+  * "NoSLQ" is an acronym for "Not only SQL." These databases store non-tabular data. Examples include [CouchDB](http://couchdb.apache.org/), [MongoDB](https://www.mongodb.org/). Typical applications for NoSQL databases include serving large-scale structured [JSON](http://json.org/) data or as complements to relational database applications. As a class of products, NoSQL databases have no standardized query language - each product uses its own language for adding, modifying, and retrieving data.
 * XML databases
   * XML databases store and query data in XML documents, not in tables. A typical application for XML databases is to provide advanced queries against a set of XML documents using the [XPath](http://en.wikipedia.org/wiki/XPath) or [XQuery](http://en.wikipedia.org/wiki/XQuery) languages. Examples of XML databases include [eXist](http://exist-db.org/) and [BaseX](http://basex.org/).
 * Triplestores
@@ -612,6 +612,7 @@ Relational databases are remarkably flexible and powerful, but they are not the 
 
 Relational databases can exist and work with any of these technologies in the same application. For example, the  repository platform [Islandora](http://islandora.ca/) uses a relational database (to power its Drupal website), a triplestore (to store and query relationship information such as which pages are in a specific book, which is a parent-child relationship), and the Solr fulltext indexing engine (for end-user queries against the content of collections and individual objects).
 
+As a general rule, if your data is alreay in XML or JSON , or if you are dealing with Linked Data, or if you want to search large quanities of textual data, one of the specialized database types mentioned above is worth investigating. But if your data can be represented as tables (and with careful entity-relationship modeling and normalization, a surprising variety of data can be), relational databases are probably the best choice for managing that data. 
 
 ## Exercise: Data modeling for relational databases
 
