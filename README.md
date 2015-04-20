@@ -474,6 +474,8 @@ Using the modifications made to our rough ER diagram, the modeller then updated 
 
 ![Revised ER diagram](assets/classes_modeling_example_revised_erd.jpg)
 
+Notice that there are two fields in the finished ER diagram that are not in the rough ER diagram, rooms.capacity and courses.num_students_enrolled. Not having these attributes would mean that we could not match up rooms with courses (a very important function of a scheduling database). Also notice that even though classes have a data and time attribute, there is nothing in the classes table that indicates how long a class lasts. This omission is OK, since all classes at this instution are 1.5 hours long. If there are any exceptions, our database can't handle them.
+
 ### Normalization
 
 Normalization is the process of applying a set of standardized tests to tables in a relational database. These tests are known as the "normal forms", which are numbered the First, Second, and Third Normal Forms. There are additional normal forms but the Third is the highest that most databases should pass.
@@ -569,9 +571,38 @@ WHERE `shape_id` = '1';
 
 In this exercise, we will perform some SELECT queries on the Classes database we modelled earlier in the workshop. Your instructor will provide the URL of the tool you will use, plus login credentials for the tool.
 
-1. Find all the..
+1. Find all the rows in the classes table for the course with ID 1. Sort by date of the class.
 
-2. Find all the 
+```sql
+SELECT * FROM classes WHERE course_id = 1 ORDER BY date;
+```
+
+2. Find the titles of courses taught by Stanislaw Novak.
+
+```sql
+SELECT courses.title from courses, instructors, courses_instructors
+WHERE instructors.last_name = 'Novak'
+AND courses.course_id = courses_instructors.course_id
+AND instructors.instructor_id = courses_instructors.instructor_id
+```
+
+3. Find all courses that only have one instructor.
+
+```sql
+SELECT courses_instructors.course_id, COUNT(courses_instructors.course_id) AS c
+FROM courses_instructors
+GROUP BY course_id HAVING(c) = 1
+```
+
+4. Find all instructors whose classes start at 9:00 a.m.
+
+```SQL
+SELECT DISTINCT instructors.last_name, instructors.first_name from instructors, classes, courses, courses_instructors
+WHERE instructors.instructor_id = courses_instructors.instructor_id
+AND courses.course_id = courses_instructors.course_id
+AND classes.course_id = courses_instructors.course_id
+AND classes.time = '09:00:00'
+```
 
 ## Integrating relational databases into applications
 
