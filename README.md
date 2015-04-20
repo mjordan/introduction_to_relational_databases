@@ -528,7 +528,7 @@ The ER diagram for the table (including the data types for each column) is:
 
 Before we populate and query our table, we need to create it. We won't use SQL to create the table, we'll be use Adminer's web interface.
 
-For this exercise, we're going to add this table to the ClassSchedules database in Adminer. True, the Shapes table is not related in any way to the content of the ClassSchedules database. It doesn't have to be. Relational databases are just containers for tables, and apart from constraint you as the database designer put on the relationships between tables, RDBMSs don't impose or enforce any additional constraints. In this exercise, we'll add the Shapes table to the ClassSchedules database simply because that database already exists and you have access to it.
+For this exercise, we're going to add this table to the ClassSchedules database in Adminer. True, the Shapes table is not related in any way to the content of the ClassSchedules database. It doesn't have to be. Relational databases are just containers for tables, and apart from constraints you as the database designer put on the relationships between tables, RDBMSs don't impose any relationships between tables. In this exercise, we'll add the Shapes table to the ClassSchedules database simply because that database already exists and you have access to it.
 
 In the ClassSchedules database in Adminer, click on the "Create table" link on the left, and enter the values in the Create table tool as illustrated below:
 
