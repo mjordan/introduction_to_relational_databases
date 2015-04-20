@@ -373,19 +373,19 @@ UNLOCK TABLES;
 
 ##### Web-based RDBMS management applications
 
-The following screenshot show the database in [Adminer](http://www.adminer.org/):
+Web-based RDBMS management applications are popular, especially for managing databases that power websites of various kinds. The following screenshot shows the tables in our Books database in [Adminer](http://www.adminer.org/):
 
 ![Adminer tables view](assets/adminer_tables_view.png)
 
 
-This is a screenshot from [PHPMyAdmin](http://www.phpmyadmin.net/home_page/index.php), a popular web-based management application for MySQL databaeses, showing the rows in a table:
+Adminer works with MySQL, PostgreSQL, and a variety of other RDBMS platforms. THe following is a screenshot from [PHPMyAdmin](http://www.phpmyadmin.net/home_page/index.php), a popular web-based management application for MySQL databaeses, showing the rows in a table:
 
 ![Adminer tables view](assets/phpmyadmin_rows_view.png)
 
 
 ##### Desktop RDBMS management applications
 
-[MySQL Workbench](https://www.mysql.com/products/workbench/):
+[MySQL Workbench](https://www.mysql.com/products/workbench/) is the standard desktop application for managing MySQL databases, and runs on Windows, OS X, and Linux. One of its most popluar features is its ability to automatically generate high-quality ER diagrams from a database configuration, or "schema":
 
 ![MySQL Workbench schema view](assets/mysqlworkbench_schema.png)
 MySQL Workbench schema view
@@ -395,7 +395,7 @@ MySQL Workbench ER diagram view
 
 ##### Limitations of RDBMS managemant applications
 
-The intended audience of RDBMS management applications is database developers and administrators. They are not designed for allowing a wide variety of users to interact with databases; rather, their focus in on the functionality that developers and administrators need. Most general end users will want to access databases through applications that easier to use and more specific to the content stored in the database than general-purpose database management applications like phpMyAdmin or MySQL Workbench. We will survey some of the tools used to create web-based access to databases in the "Web application frameworks" section below.
+The intended audience of RDBMS management applications is database developers and administrators. These applications are not designed for allowing a wide variety of users to interact with databases; rather, their focus in on the functionality that developers and administrators need. Most general end users will want to access databases through applications that easier to use and more specific to the content stored in the database than general-purpose database management applications like phpMyAdmin or MySQL Workbench. We will survey some of the tools used to create web-based access to databases in the "Web application frameworks" section below.
 
 The most obvious limitation to most RDBMS management tools is that while they provide a simple interface for populating and updating individual tables, they do not allow users to populate and update linked tables easily. For example, if you wanted to add a book entry to the database we saw in the overview section, you'd also want to add at least one linked record for the book's edition. Let's look again at the Editions table:
 
@@ -496,10 +496,9 @@ Join tables are allowed to contain columns other than the foreign keys of the ta
 
 If the course_instructors contained a "highest_degree" column, the table would not pass the Second Normal Form. An instructor's highest degree applies only to the instructor, not the course she is teaching. If she has a PhD, she has it for every course she teaches.
 
-
 #### Third Normal Form (3NF)
 
-The Third Normal Form requires that every non-key column must state a fact about the row's key and only about the row's key. In other words, every non-key column must be completely independent of each other non-key column. All of our tables pass this test: all of the non-key columns state a piece of data that describes the thing identified in the primary key column irrespective of the values of the other non-primary key columns in the row.
+The Third Normal Form requires that every non-key column must state a fact about the row's primary key and only about the row's primary key. In other words, every non-key column must be completely independent of each other non-key column. All of our tables pass this test: all of the non-key columns state a piece of data that describes the thing identified in the primary key column irrespective of the values of the other non-primary key columns in the row.
 
 #### Fourth and Fifth Normal Forms
 
