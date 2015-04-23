@@ -492,9 +492,17 @@ Each column/row intersection can contain only one value. Values cannot be repeat
 
 The Second Normal Form applies to tables that use a composite key. It states that all non-key columns must describe the entire composite key, not just part of it.
 
-Join tables are allowed to contain columns other than the foreign keys of the tables they join. Even though the only join table in our database doesn't have any columns other than the two ID columns from the tables it joins, we can imaging a plausible (if not unusual) situation to illustrate a table that does not pass the Second Normal Form. Suppose our university needs to designate one instructor in a multi-instructor course as senior and the others as junior for promotion and tenure purposes. To document this requirement, we add a third column to the course_instructors table that describes each instructor's seniority level in a given course.  This example passes the Second Normal Form because the "seniority" column in any row will apply to the specific combination of instructor and course.
+Join tables are allowed to contain columns other than the foreign keys of the tables they join. Even though the only join table in our database doesn't have any columns other than the two ID columns from the tables it joins, we can imaging a plausible (if not unusual) situation to illustrate a table that does not pass the Second Normal Form. Suppose our university needs to designate one instructor in a multi-instructor course as senior and the others as junior for promotion and tenure purposes. To document this requirement, we add a third column to the course_instructors table that describes each instructor's seniority level in a given course:
 
-If the course_instructors contained a "highest_degree" column, the table would not pass the Second Normal Form. An instructor's highest degree applies only to the instructor, not the course she is teaching. If she has a PhD, she has it for every course she teaches.
+![Passes 2NF](assets/2nf_good.jpg)
+
+ This example passes the Second Normal Form because the "seniority" column in any row will apply to the specific combination of instructor and course.
+
+If the course_instructors contained a "highest_degree" column, the table would not pass the Second Normal Form:
+
+![Passes 2NF](assets/2nf_bad.jpg)
+
+An instructor's highest degree applies only to the instructor, not the course she is teaching. If she has a PhD, she has it for every course she teaches.
 
 #### Third Normal Form (3NF)
 
