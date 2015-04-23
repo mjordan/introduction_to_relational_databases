@@ -512,7 +512,7 @@ The Third Normal Form requires that every non-key column must state a fact about
 
 #### Fourth and Fifth Normal Forms
 
-Don't worry about these.
+Don't worry about these. This is a 4-hour introductory workshop.
 
 ### Testing databases
 
@@ -746,7 +746,7 @@ Wordpress is a popular blogging and Content Management System that powers a [ver
 
 This diagram shows us that rows in the wp_posts table are on the "one" side of a one-to-many relationship with rows in three "many" tables, and is on the "many" side of a relationship with the wp_users table.
 
-Also of note is the use of several lookup tables (wp_usermeta, wp_commentmeta, and wp_postmeta) that use the  "[key-value](http://en.wikipedia.org/wiki/Attribute-value_pair)" pattern to define rows. Tables that use this pattern define a single column for keys and a single column for values. In each row, the key is the name of an attribute and the value is the content of the attribute:
+Also of note is the use of several lookup tables (wp_usermeta, wp_commentmeta, and wp_postmeta) that use the  "[key-value](http://en.wikipedia.org/wiki/Attribute-value_pair)" pattern to define rows. Tables that use this pattern define a single column for keys and a single column for values. In each row, the key is the name of an attribute and the value is the content of the attribute. An example key-value table (not from Wordpress, this is just a made-up example) could look like:
 
 ![Key-value structure example](assets/key_value_example.png)
 
