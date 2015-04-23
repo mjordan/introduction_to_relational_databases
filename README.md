@@ -744,7 +744,11 @@ Wordpress is a popular blogging and Content Management System that powers a [ver
 
 This diagram shows us that rows in the wp_posts table are on the "one" side of a one-to-many relationship with rows in three "many" tables, and is on the "many" side of a relationship with the wp_users table.
 
-Also of note is the use of several lookup tables (wp_usermeta, wp_commentmeta, and wp_postmeta) that use the  "[key-value](http://en.wikipedia.org/wiki/Attribute-value_pair)" pattern to define rows. Tables that use this pattern define a single column for keys and a single column for values. In each row, the key is the name of an attribute and the value is the content of the attribute. Using this structure, the table can store date whose key or name is not known when the table was designed and created. Tables that use key-value structure are very flexible, but SQL queries used to manage them and select data from them are more complicated than ones that use predictable column names.
+Also of note is the use of several lookup tables (wp_usermeta, wp_commentmeta, and wp_postmeta) that use the  "[key-value](http://en.wikipedia.org/wiki/Attribute-value_pair)" pattern to define rows. Tables that use this pattern define a single column for keys and a single column for values. In each row, the key is the name of an attribute and the value is the content of the attribute:
+
+![Key-value structure example](assets/key_value_example.png)
+
+Using this structure, the table can store date whose key or name is not known when the table was designed and created. Tables that use key-value structure are very flexible, but SQL queries used to manage them and select data from them are more complicated than ones that use predictable column names.
 
 ### Firefox
 
