@@ -2,19 +2,19 @@
 
 ## Overview of the workshop
 
-In this 4-hour workshop, participants will learn the basics of data modeling for relational databases, the relational database development process, and querying relational databases using SQL (Structured Query Language). The workshop will also present an overview of how relational databases are integrated into websites and other types of applications. The workshop will include a number of hands-on exercises and the chance to create, populate, and query a simple database.
+In this 4-hour workshop, participants will learn the basics of data modeling for relational databases (RDBMs), the relational database development process, and querying relational databases using SQL (Structured Query Language). The workshop will also present an overview of how relational databases are integrated into websites and other types of applications. The workshop will include hands-on exercises and the chance to create, populate, and query a simple database.
 
 ## How relational databases work
 
 ### Tables, relationships, and IDs
 
-Relational databases strucutre data in tables, and provide mechanisms for linking (relating) those tables together to so that the data can be queried and managed efficiently. For example, if we wanted to manage a list of books, we would create a table that contained some data about those books:
+Relational databases organize data into tables, and provide mechanisms for linking (relating) those tables together to so that the data can be queried and managed efficiently and with great flexibility. For example, if we wanted to manage a list of books, we would create a table that contained some data about those books:
 
 ![Some sample books](assets/sample_book_list.png)
 
 Each row in the table describes a single book, and the data is organized into columns, with each intersection of a row and a column containing a single piece of data. But if each intersection of a row and a column can contain only one piece of data, how do we handle data that can apply more than once to each book, such as its author? It's pretty common for a book to have more than one author.
 
-Relational databases organize data into multiple tables, and link the tables together so that all the data about something (in our example, a single book) can be assembled from the relevant tables as needed. In order to make sure the links between tables are trustworthy, each row in each table needs to have a unique identifier. We will provide more information about identifiers (commonly called "ids") shortly but notice that all of the tables depicted below have ID columns.
+Relational databases deal with this situation by organizing data into multiple tables, and link the tables together so that all the data about something (in our example, a single book) can be assembled from the relevant tables as needed. In order to make sure the links between tables are trustworthy, each row in each table needs to have a unique identifier. We will provide more information about identifiers (commonly called "IDs") shortly, but for now, we should notice that all of the tables depicted below have ID columns.
 
 If we put data about authors in its own table, we can allow each book to have multiple authors. Because each book can have many authors, and each author can have written more than one book, we say that books and authors have a "many-to-many" relationship with each other. Relational databases accommodate this type of relationship by using a third table whose function is to relate the two things described in separate tables, as illustrated in this diagram:
 
@@ -28,9 +28,9 @@ This intermediate table (in this example, BooksAuthors) is known as a "relation"
 
 One-to-many relationships also require that rows in tables have unique IDs, but unlike in the join table used in many-to-many relationship, the table that contains the data describing the "many" side of the relationship has a column reserved for the ID of the "one" side of the relationship. 
 
-The IDs used to uniquely identify the things described in tables are called "primary keys". If the primary key of one table is used in another table, the key in the other table is called a "foreign key" in that table. For example, the "book_id" column in the Books table is that table's primary key, but the "book_id" column in the Editions table is a foreign key. The purpose of foreign keys is to link the two tables.
+The IDs used to uniquely identify the things described in tables are called "primary keys". If the primary key of one table is used in another table, the key in the other table is called a "foreign key" in that table. For example, the "book_id" column in the Books table is that table's primary key, but the "book_id" column in the Editions table is a foreign key. The purpose of foreign keys is to link the two tables in a one-to-many relationship.
 
-You may be wondering why we didn't use ISBN for the unique ID for each row in the Books table. We could have done that, but there is a problem with ISBNs: it is easy for a human operator to make an error while entering them. Since primary keys need to be unique, we don't want to use something as the primary key that we can't trust to be unique. If we used ISBNs as primary keys, and we encountered one that was the same as an ISBN that was already in our database, the database would not save the row. If your rows have attributes that you can be absolutley sure will be unique, you can use that attribute as a primary key, but it's usually safer, and a common convention, to let the RDBMS assign an auto-incremented integer as the primary key.
+You may be wondering why we didn't use ISBN for the unique ID for each row in the Books table. We could have done that, but there is a problem with ISBNs: it is easy for a human operator to make an error while entering them. Since primary keys need to be unique, we don't want to use something as the primary key that we can't trust to be unique. If we used ISBNs as primary keys, and we encountered one that was the same as an ISBN that was already in our database due to data-entry error, the database would not save the row. If your rows have attributes that you can be absolutley sure will be unique, you can use that attribute as a primary key, but it's usually safer, and a common convention, to let the RDBMS assign an automatically assigned number (an ordinary integer) as the primary key.
 
 For join tables, the primary key for each row is the unique _combination_ of the foreign keys from the two joined tables. In our example, the primary key of BooksAuthors is the combination of book_id and author_id. A primary key that is comprised of more than one attribute is called a "composite key."
 
@@ -113,14 +113,15 @@ As you can see from the sample data, some of the columns contain what look like 
 * varchar (which is short for "variable character data," or in other words, text)
 * text (text)
 * boolean (either true or false; represented in some systems as 1 or 0, respectively)
+* date (e.g., 2014-03-12)
 
-Columns that are of varchar or text data types both contain text. The distinction between the two is mostly a matter of implementation and with the RDBMS. In this workshop we will use the text data type when creating tables. Even though we do not cover the distinctions between varchar and text, or introduce other data types, determining which data type a column should have is very important step in designing higly performant and optimized databases. Choosing the wrong data type for a column can have a dramatic impact on a database's speed and the amount of disk space it consumes, especially when the database has tables containing thousands or millions of rows.
+Columns that are of varchar or text data types both contain text. The distinction between the two is mostly a matter of implementation within the RDBMS. In this workshop we will use the text data type when creating tables. Even though we do not cover the distinctions between varchar and text, or introduce a lot of other data types, determining which data type a column should have is very important step in designing higly performant and optimized databases. Choosing the wrong data type for a column can have a dramatic impact on a database's speed and the amount of disk space it consumes, especially when the database has tables containing thousands or millions of rows.
 
 One of the most common uses of the integer data type is to define "auto-increment" columns in a table. An important rule that you need to follow when choosing a data type for a column is that if you want the RDBMS to generate unique IDs for rows in a table, define the ID column in the table to be an auto-incrementing integer. If you do that, every new row added to the table will get a value in the ID column that is 1 higher than the value in that column for most recently created row. If you look at the Books, Authors, and Editions tables above, you will see the ascending values in the ID columns. The order of the IDs reflects the order in which the rows were added to the tables.
 
 A corollary to this rule is that the data type for columns that are foreign keys should be the same as the data type for the primary key they link to. Therefore, if primary keys are of type integer, then foreign keys should be as well.
 
-Columns of type boolean have two possible values, true or false. Most RDBMSs represent true and false as the integers 1 and 0, respectively.
+Columns of type boolean have two possible values, true or false. Most RDBMSs represent true and false as the integers 1 and 0, respectively. Date columns enforce YYYY-MM-DD dates.
 
 Defining indexes on columns is also a very important component in designing highly scalable databases, but we won't cover it in this workshop. Indexes allow the RDBMS to very quickly locate a particular row in a table without having to search every row. It is very common to define an index on a column if the table that the column is in is queried often. Primary and foreign keys are commonly indexed for this reason.
 
@@ -199,13 +200,13 @@ which returns the folowing results:
 ```
 You'll notice repetition in the book_id, title, and ISBN columns in the results. Those columns are the ones we're asking for in the query, so the response is correct, since we're also asking for the date of publication from the Editions table, which in our results contains the correct values.
 
-You'll also notice that in this last query, we referred to Books.book_id and Editions.book_id. Since the column book_id exists in more than one table, we need to disambiguate which book_id column we mean. RDBMSs let us refer columns in specific tables this way (in fact, they require it in situations where the column name is ambiguous).
+You'll also notice that in this last query, we referred to Books.book_id and Editions.book_id. Because the column book_id exists in more than one table, we need to disambiguate which book_id column we mean. RDBMSs let us refer columns in specific tables this way (in fact, they require it in situations where the column name is ambiguous).
 
 ### Relational database management systems
 
 #### Common systems
 
-There are many proprietary and open source relational database management systems (RDBMSs). The most common include:
+There are many proprietary and open source RDBMSs. The most common include:
 
 * [MySQL](https://www.mysql.com/)
 * [PostgreSQL](http://www.postgresql.org/)
@@ -216,12 +217,12 @@ There are many proprietary and open source relational database management system
 * [Microsoft SQL Server](http://www.microsoft.com/en-ca/server-cloud/products/sql-server/)
 * [Oracle](https://www.oracle.com/database/index.html)
 
-While SQL is an [international standard](http://en.wikipedia.org/wiki/SQL#Standardization), and most of the systems listed above implement it thoroughly, every RDBMS has features or extensions to SQL that differentiate it from its competitors. Some, like Microsoft Access and Filemaker, include full graphical user interfaces to creating and querying databases. Others, like MySQL and PostgreSQL, include only a back-end server and command-line clients for querying and administration. It is common for third-party tools to be used to interact with these databases. Some of these tools are described in the next section.
+While SQL is an [international standard](http://en.wikipedia.org/wiki/SQL#Standardization), and most of the systems listed above implement it thoroughly, every RDBMS has features or extensions to SQL that differentiate it from its competitors. Some, like Microsoft Access and Filemaker, include full graphical user interfaces to creating and querying databases. Others, like MySQL and PostgreSQL, include only a back-end server and command-line clients for querying and administration. It's common for third-party tools to be used to interact with these databases. Some of these tools are described in the next section.
 
 
 #### Interacting with RDBMSs
 
-In this workshop, we'll be interacting with our databases using a web-based management tool called [Adminer](http://www.adminer.org/). However, it is important to note that there are a variety of ways to interact with relational databases.
+In this workshop, we'll be interacting with our databases using a web-based management tool called [Adminer](http://www.adminer.org/). However, it's important to note that there are a variety of ways to interact with relational databases.
 
 ##### Command-line clients
 
@@ -378,24 +379,25 @@ Web-based RDBMS management applications are popular, especially for managing dat
 ![Adminer tables view](assets/adminer_tables_view.png)
 
 
-Adminer works with MySQL, PostgreSQL, and a variety of other RDBMS platforms. THe following is a screenshot from [PHPMyAdmin](http://www.phpmyadmin.net/home_page/index.php), a popular web-based management application for MySQL databaeses, showing the rows in a table:
+Adminer works with MySQL, PostgreSQL, and a variety of other RDBMS platforms. The following is a screenshot from [PHPMyAdmin](http://www.phpmyadmin.net/home_page/index.php), a popular web-based management application for MySQL databases, showing the rows in a table:
 
 ![Adminer tables view](assets/phpmyadmin_rows_view.png)
 
 
 ##### Desktop RDBMS management applications
 
-[MySQL Workbench](https://www.mysql.com/products/workbench/) is the standard desktop application for managing MySQL databases, and runs on Windows, OS X, and Linux. One of its most popluar features is its ability to automatically generate high-quality ER diagrams from a database configuration, or "schema":
+[MySQL Workbench](https://www.mysql.com/products/workbench/) is the standard desktop application for managing MySQL databases, and runs on Windows, OS X, and Linux. One of its most popluar features is its ability to automatically generate high-quality ER diagrams from a database configuration, or "schema." The following is a screen shot of the schema view of the BooksAuthors table in MySQL Workbench:
 
 ![MySQL Workbench schema view](assets/mysqlworkbench_schema.png)
-MySQL Workbench schema view
+
+This is the ER diagram created from the schema:
 
 ![MySQL Workbench ER diagram view](assets/mysqlworkbench_er_diagram.png)
-MySQL Workbench ER diagram view
+
 
 ##### Limitations of RDBMS managemant applications
 
-The intended audience of RDBMS management applications is database developers and administrators. These applications are not designed for allowing a wide variety of users to interact with databases; rather, their focus in on the functionality that developers and administrators need. Most general end users will want to access databases through applications that easier to use and more specific to the content stored in the database than general-purpose database management applications like phpMyAdmin or MySQL Workbench. We will survey some of the tools used to create web-based access to databases in the "Web application frameworks" section below.
+The intended audience of RDBMS management applications is database developers and administrators. These applications are not designed for allowing a wide variety of users to interact with databases; rather, their focus in on the functionality that developers and administrators need. Most general end users will want to access databases through applications that easier to use and more specific to the content stored in the database (and more specific to their use of the data) than general-purpose database management applications like phpMyAdmin or MySQL Workbench. We will survey some of the tools used to create web-based access to databases in the "Web application frameworks" section below.
 
 The most obvious limitation to most RDBMS management tools is that while they provide a simple interface for populating and updating individual tables, they do not allow users to populate and update linked tables easily. For example, if you wanted to add a book entry to the database we saw in the overview section, you'd also want to add at least one linked record for the book's edition. Let's look again at the Editions table:
 
@@ -416,7 +418,7 @@ If you are adding a row to this table, you need to know which book ID to use to 
 
 In the exercises using SQL below, we'll need to work around this limitation of the tool we are using by opening multiple web browser windows so we can see all the tables we are using in our queries. Your instructor will demonstrate this work around in person.
 
-One web-based RDBMS management tool that does not have this limitation is [Xataface](http://xataface.com/). The screen shot below was taken from a database that uses Xataface. (The database, coincidentally, also describes books, specifcally, a set of books published from the late 1700s up to the end of the 1900s associated with a particular region in England.) The "Places" form depicted here exists within the form used to edit book entries. The database contains a "books" table, a "publication_place" table, and a more general "place" table. The example below shows how the user can choose a value from either of those tables directly within the form used to edit the book that the places are associated with:
+One web-based RDBMS management tool that does not have this limitation is [Xataface](http://xataface.com/). The screen shot below was taken from a database that uses Xataface. (The database shown, coincidentally, also describes books, specifcally a set of books published from the late 1700s up to the end of the 1900s associated with a particular region in England.) The "Places" form depicted here exists within the form used to edit book entries. The database contains a "books" table, a "publication_place" table, and a more general "place" table. The example below shows how the user can choose a value from either of those tables directly within the form used to edit the book that the places are associated with:
 
 ![Example of an autocomplete field for selecting values from linked tables](assets/xataface_linked_table_example.png)
 Image courtesy of John Dingle and Margaret Linley.
@@ -429,7 +431,7 @@ Image courtesy of John Dingle and Margaret Linley.
 
 ### Relational database development process
 
-The process of developing the structure of a relational database is iterative. Only the simplest databases do not require repeated testing and adjustment before they meet their intended goals. This diagram represents the various steps you should consider taking while developing your database, starting with "Define entities and their attributes" and moving clockwise:
+The process of developing the structure of a relational database is iterative. Only the simplest databases do not require repeated testing and adjustment before they meet their intended goals. The following diagram represents the various steps you should consider taking while developing your database, starting with "Define entities and their attributes" and moving clockwise:
 
 ![Database development process](assets/DB_Development_process.jpg)
 
@@ -445,7 +447,7 @@ We will begin by listing all of the things we need to include in our database:
 * Courses
 * Rooms
 
-If we put some thought into this short list of entities, and add to each one the likely attributes that we'll need to include, we come up with a more detailed list, plus some example values for the attributes and some questions we need to flesh out more fully later on. You will notice that this more detailed list adds "instructors" as a top-level entity. No specific methodology resulted in this addition, the person doing the modeling simply decided that, given the goal of this database, it would be useful to include instructors as an entity since they are so tightly associated with courses, and that it is likely that the person teaching the course may need to be notified in the event that a problem arose with the room where a class is being held. Database modeling is as much as an art as it is a science. Our expanded list looks like this:
+If we put some thought into this short list of entities, and add to each one the likely attributes that we'll need to include, we come up with a more detailed list and example values. For some attributes, we'll ask some questions we need to flesh out more fully later on. You will notice that this more detailed list adds "instructors" as a top-level entity. No specific methodology resulted in this addition; the person doing the modeling simply decided that, given the goal of this database, it would be useful to include instructors as an entity since they are so tightly associated with courses, and that it is likely that the person teaching the course may need to be notified in the event that a problem arose with the room where a class is being held. Database modeling is as much as an art as it is a science. Our expanded list looks like this:
 
 * Classes
   * Date
@@ -459,11 +461,11 @@ If we put some thought into this short list of entities, and add to each one the
   * Department
   * Semester [Do we need semsester if we have dates?]
 * Locations
-  * Room number [Why do we use "room" for the attributes but call the table "locations"?]
-  * Room name
+  * Location number [Why do we use "room" for the attributes but call the table "locations"?]
+  * Location name
   * Building
   * Type (e.g., classroom, seminar, amphitheatre, etc.)
-  * Built-in projector [maybe split out into Room Details table?]
+  * Built-in projector [maybe split out into Location Details table?]
 * Instructors
   * Last name
   * First name
@@ -608,7 +610,7 @@ produces the expected results:
 2 rows in set (0.00 sec)
 ```
 
-If we can query our database and get back expected results, its tables are probably structured well enough to move into production. If out test queries return any unexpected results, we need to re-evaluate our entities (and their attributes) and how the tables we have constructed are linked together.
+If we can query our database and get back expected results, its tables are probably structured well enough to move into production. If out test queries return any unexpected results, we need to re-evaluate our entities (and their attributes) and how the tables we have constructed are linked together. In other words, we need to go through our iterative process again until all of our sample queries return results that we expect.
 
 ## Exercise: Using SQL
 
@@ -650,7 +652,7 @@ CREATE TABLE IF NOT EXISTS `shapes` (
 
 ### Inserting data
 
-We'll use raw SQL to add (INSERT) a row into the table. Click on the "SQL command" link on the left-hand side of the Adminer interface and enter this:
+We'll use raw SQL to add (INSERT) a row into the table. Click on the "SQL command" link on the left-hand side of the Adminer interface and enter the following. The backticks (`) can be replaced by single or double quotation marks if you want:
 
 ```sql
 INSERT INTO `shapes` (`name`, `number_straight_sides`, `example_picture_url`, `real_world_example`)
