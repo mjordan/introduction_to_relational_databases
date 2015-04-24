@@ -115,9 +115,11 @@ As you can see from the sample data, some of the columns contain what look like 
 * boolean (either true or false; represented in some systems as 1 or 0, respectively)
 * date (e.g., 2014-03-12)
 
-Columns that are of varchar or text data types both contain text. The distinction between the two is mostly a matter of implementation within the RDBMS. In this workshop we will use the text data type when creating tables. Even though we do not cover the distinctions between varchar and text, or introduce a lot of other data types, determining which data type a column should have is very important step in designing higly performant and optimized databases. Choosing the wrong data type for a column can have a dramatic impact on a database's speed and the amount of disk space it consumes, especially when the database has tables containing thousands or millions of rows.
+Columns that are of varchar or text data types both contain text. The distinction between the two is mostly a matter of implementation within the RDBMS. In this workshop we will use the text data type when creating tables. Even though we do not cover the distinctions between varchar and text, or introduce a lot of other data types, determining which data type a column should have is very important step in designing higly performant and optimized databases. Choosing the wrong data type for a column can have a dramatic impact on a database's speed and the amount of disk space it consumes, especially when the database has tables containing thousands or millions of rows. 
 
 One of the most common uses of the integer data type is to define "auto-increment" columns in a table. An important rule that you need to follow when choosing a data type for a column is that if you want the RDBMS to generate unique IDs for rows in a table, define the ID column in the table to be an auto-incrementing integer. If you do that, every new row added to the table will get a value in the ID column that is 1 higher than the value in that column for most recently created row. If you look at the Books, Authors, and Editions tables above, you will see the ascending values in the ID columns. The order of the IDs reflects the order in which the rows were added to the tables.
+
+("Auto increment" is the name given to this type of column in MySQL. In PostgreSQL, the data type is called "SERIAL." In Microsoft SQL Server, it's called "IDENTITY." They all do pretty much work the same way.)
 
 A corollary to this rule is that the data type for columns that are foreign keys should be the same as the data type for the primary key they link to. Therefore, if primary keys are of type integer, then foreign keys should be as well.
 
@@ -217,7 +219,7 @@ There are many proprietary and open source RDBMSs. The most common include:
 * [Microsoft SQL Server](http://www.microsoft.com/en-ca/server-cloud/products/sql-server/)
 * [Oracle](https://www.oracle.com/database/index.html)
 
-While SQL is an [international standard](http://en.wikipedia.org/wiki/SQL#Standardization), and most of the systems listed above implement it thoroughly, every RDBMS has features or extensions to SQL that differentiate it from its competitors. Some, like Microsoft Access and Filemaker, include full graphical user interfaces to creating and querying databases. Others, like MySQL and PostgreSQL, include only a back-end server and command-line clients for querying and administration. It's common for third-party tools to be used to interact with these databases. Some of these tools are described in the next section.
+While SQL is an [international standard](http://en.wikipedia.org/wiki/SQL#Standardization), and most of the systems listed above implement it thoroughly, every RDBMS has features or extensions to SQL that differentiate it from its competitors (and, as we saw with the "auto increment" data type, the specifics of the SQL implementation can vary). Some RDBMSs, like Microsoft Access and Filemaker, include full graphical user interfaces to creating and querying databases. Others, like MySQL and PostgreSQL, include only a back-end server and command-line clients for querying and administration. It's common for third-party tools to be used to interact with these databases. Some of these tools are described in the next section.
 
 
 #### Interacting with RDBMSs
