@@ -633,7 +633,7 @@ If we can query our database and get back expected results, its tables are proba
 
 ## Exercise 2: Using SQL
 
-In this exercise, we will create a database table describing shapes, populate the table with some data, and modify some of the data. Your instructor will provide the URL of the tool you will use, plus login credentials for the tool.
+In this exercise, we will create a database table describing shapes, populate the table with some data, and modify some of the data. Your instructor will provide the URL adn login credentials for the tool you will use.
 
 The ER diagram for the table (including the data types for each column) is:
 
