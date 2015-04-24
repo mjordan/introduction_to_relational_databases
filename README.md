@@ -441,7 +441,7 @@ Defining the entities in the database (the things that the database describes), 
 
 ### Entity-relationship modeling
 
-Our goal in this example of entity-relationship modeling is to create a database that we can use to schedule classes in a set of academic courses. Any real school, college, university, or training center will have such a database. The database used in this example is _probably_ a lot simpler than the real databases used in these institutions.
+Our goal in this example of entity-relationship modeling is to create a database that we can use to schedule classes in a set of academic courses. Put another way, the "scope" of our database is the classes, courses they are part of, and the locations they are held in. Any real school, college, university, or training center will have such a database. The database used in this example is _probably_ a lot simpler than the real databases used in these institutions.
 
 We will begin by listing all of the things we need to include in our database:
 
@@ -486,11 +486,20 @@ Notice that there are two fields in the finished ER diagram that are not in the 
 
 ## Exercise 1: Entity-relationship modeling
 
-Below are some sample topics that we can use to practive ER modeling. Pick a topic, and define the scope of the database you are creating in a single sentence (like "...to create a database that we can use to schedule classes in a set of academic courses" used in the example above). Then, start by listing all of the entities you will need in your database and move on to adding their attributes. After that, draw (on paper or using a piece of software) some ER diagrams showing how the entities relate to each other, noting the primary keys and foreign keys, and join tables if necessary.
+Below are some sample topics that we can use to practice ER modeling.
+
+1. Pick a topic, and define the scope of the database you are creating in a single sentence (like "...to create a database that we can use to schedule classes in a set of academic courses" used in the example above).
+2. Start the ER modeling by listing all of the entities you will need in your database.
+3. In a new list, add all of your entities' attributes.
+4. After that, draw (on paper or using a piece of software) some ER diagrams showing how the entities relate to each other, noting the primary keys and foreign keys, and join tables if necessary.
+
+The topics to choose from are:
 
 * Database that tracks which articles cite which other articles
 * Personal music, book (or other) collection
 * Research project status reporter (for producing periodic updates)
+
+You can use another topic if you want to.
 
 ### Normalization
 
