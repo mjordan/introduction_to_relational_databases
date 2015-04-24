@@ -490,7 +490,7 @@ Below are some sample topics that we can use to practice ER modeling.
 
 1. Pick a topic, and define the scope of the database you are creating in a single sentence (like "...to create a database that we can use to schedule classes in a set of academic courses" used in the example above).
 2. Start the ER modeling by listing all of the entities you will need in your database.
-3. In a new list, add all of your entities' attributes.
+3. Expand the list by adding all of your entities' attributes.
 4. After that, draw (on paper or using a piece of software) some ER diagrams showing how the entities relate to each other, noting the primary keys and foreign keys, and join tables if necessary.
 
 The topics to choose from are:
