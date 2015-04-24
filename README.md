@@ -484,6 +484,14 @@ Using the modifications made to our rough ER diagram, the modeller then updated 
 
 Notice that there are two fields in the finished ER diagram that are not in the rough ER diagram, rooms.capacity and courses.num_students_enrolled. Not having these attributes would mean that we could not match up rooms with courses (a very important function of a scheduling database). Also notice that even though classes have a data and time attribute, there is nothing in the classes table that indicates how long a class lasts. This omission is OK, since all classes at this instution are 1.5 hours long. If there are any exceptions, our database can't handle them.
 
+## Exercise 1: Entity-relationship modeling
+
+Below are some sample topics that we can use to practive ER modeling. Pick a topic, and define the scope of the database you are creating in a single sentence (like "...to create a database that we can use to schedule classes in a set of academic courses" used in the example above). Then, start by listing all of the entities you will need in your database and move on to adding their attributes. After that, draw (on paper or using a piece of software) some ER diagrams showing how the entities relate to each other, noting the primary keys and foreign keys, and join tables if necessary.
+
+* Database that tracks which articles cite which other articles
+* Personal music, book (or other) collection
+* Research project status reporter (for producing periodic updates)
+
 ### Normalization
 
 Normalization is the process of applying a set of standardized tests to tables in a relational database. These tests are known as the "normal forms", which are numbered the First, Second, and Third Normal Forms. There are additional normal forms but the Third is the highest that most databases should pass.
@@ -614,7 +622,7 @@ produces the expected results:
 
 If we can query our database and get back expected results, its tables are probably structured well enough to move into production. If out test queries return any unexpected results, we need to re-evaluate our entities (and their attributes) and how the tables we have constructed are linked together. In other words, we need to go through our iterative process again until all of our sample queries return results that we expect.
 
-## Exercise: Using SQL
+## Exercise 2: Using SQL
 
 In this exercise, we will create a database that contains a single table describing shapes, populate the table with some data, and modify some of the data. Your instructor will provide the URL of the tool you will use, plus login credentials for the tool.
 
@@ -691,7 +699,7 @@ WHERE `shape_id` = '1';
 
 Now, delete the rows for the two shapes that you added.
 
-## Exercise: Selecting data from the Class Scheduling database
+## Exercise 3: Selecting data from the Class Scheduling database
 
 In this exercise, we will modify the SELECT queries used to test the ClassSchedules database we modelled earlier in the workshop.
 
@@ -793,13 +801,12 @@ Relational databases can exist and work with any of these technologies in the sa
 
 As a general rule, if your data is alreay in XML or JSON , or if you are dealing with Linked Data, or if you want to search large quanities of textual data, one of the specialized database types mentioned above is worth investigating. But if your data can be represented as tables (and with careful entity-relationship modeling and normalization, a surprising variety of data can be), relational databases are probably the best choice for managing that data. 
 
-## Exercise: Data modeling for relational databases
+## Exercise 4: Data modeling for relational databases, part 2
 
-Below are some sample topics that we can use to practive ER modeling. Pick a topic, and define the scope of the database you are creating in a single sentence (like "...to create a database that we can use to schedule classes in a set of academic courses" used in the example above). Then, start by listing all of the entities you will need in your database and move on to adding their attributes. After that, draw (on paper or using a piece of software) some ER diagrams showing how the entities relate to each other, noting the primary keys and foreign keys, and join tables if necessary.
+Using the ER diagrams you created in Exercise 1:
 
-* Database that tracks which articles cite which other articles
-* Personal music, book (or other) collection
-* Research project status reporter (for producing periodic updates)
+1. apply the normalization tests to your tables
+2. write some SQL SELECT queries that would test your table designs
 
 ## License
 
